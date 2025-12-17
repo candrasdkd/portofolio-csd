@@ -63,8 +63,8 @@ export const PROJECTS: Project[] = [
     title: "M-OK",
     category: ProjectCategory.CLIENT,
     type: ProjectType.MOBILE,
-    description: "M-OK, the official mobile application of KPP Mining",
-    fullDescription: "M-OK is an abbreviation of KPP mobile office, which is an internal application of PT Kalimanan Prima Persada that functions to provide facilities that support the work and personal needs of employees.",
+    description: "M-OK adalah singkatan dari mobile office KPP, yang merupakan aplikasi internal PT Kalimanan Prima Persada yang berfungsi untuk menyediakan fasilitas yang menunjang pekerjaan dan kebutuhan personal dari karyawan.",
+    fullDescription: "M-OK adalah singkatan dari mobile office KPP, yang merupakan aplikasi internal PT Kalimanan Prima Persada yang berfungsi untuk menyediakan fasilitas yang menunjang pekerjaan dan kebutuhan personal dari karyawan.",
     technologies: ["React Native", "Redux", "Kotlin", "Java", "Swift", "GraphQL", "Postman", "SQL Server", "MongoDB", "Google Play Store", "App Store", "Figma"],
     // Gunakan gambar rasio Portrait (misal 400x800) untuk simulasi mobile
     images: ["assets/mok1.png", "assets/mok2.png", "assets/mok3.png", "assets/mok4.png", "assets/mok5.png", "assets/mok6.png", "assets/mok7.png"],
