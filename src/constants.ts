@@ -17,13 +17,13 @@ export const SKILLS: Skill[] = [
   { name: "Kotlin/Java", icon: "kt/java", level: 60 },
   { name: "TypeScript", icon: "ts", level: 80 },
   { name: "Javascript", icon: "js", level: 90 },
-  { name: "Tailwind CSS", icon: "tailwind", level: 60 },
-  { name: "Figma", icon: "figma", level: 80 },
+  { name: "GraphQL", icon: "graphql", level: 65 },
   { name: "Firebase", icon: "firebase", level: 70 },
   { name: "SQL Server", icon: "sql", level: 50 },
   { name: "Mongo DB", icon: "mongo", level: 50 },
-  { name: "GraphQL", icon: "graphql", level: 70 },
-  { name: "Postman", icon: "postman", level: 70 },
+  { name: "Tailwind CSS", icon: "tailwind", level: 60 },
+  { name: "Figma", icon: "figma", level: 60 },
+  { name: "Git / GitHub", icon: "git", level: 85 },
 ];
 
 export const EXPERIENCE: ExperienceItem[] = [
@@ -60,6 +60,32 @@ export const EXPERIENCE: ExperienceItem[] = [
 export const PROJECTS: Project[] = [
   {
     id: 1,
+    title: "M-OK",
+    category: ProjectCategory.CLIENT,
+    type: ProjectType.MOBILE,
+    description: "M-OK, the official mobile application of KPP Mining",
+    fullDescription: "M-OK is an abbreviation of KPP mobile office, which is an internal application of PT Kalimanan Prima Persada that functions to provide facilities that support the work and personal needs of employees.",
+    technologies: ["React Native", "Redux", "Kotlin", "Java", "Swift", "GraphQL", "Postman", "SQL Server", "MongoDB", "Google Play Store", "App Store", "Figma"],
+    // Gunakan gambar rasio Portrait (misal 400x800) untuk simulasi mobile
+    images: ["assets/mok1.png", "assets/mok2.png", "assets/mok3.png", "assets/mok4.png", "assets/mok5.png", "assets/mok6.png", "assets/mok7.png"],
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.kppmining.mok",
+    appStoreUrl: "https://apps.apple.com/id/app/m-ok/id6456406607"
+  },
+  {
+    id: 2,
+    title: "Kejarcita",
+    category: ProjectCategory.CLIENT,
+    type: ProjectType.MOBILE,
+    description: "Kejarcita adalah platform pendidikan daring terbaik untuk siswa, guru, dan sekolah. Dapat digunakan untuk latihan mandiri maupun untuk mendukung KBM online.",
+    fullDescription: "Platform pendidikan daring terbaik untuk siswa, guru, dan sekolah. Dapat digunakan untuk latihan mandiri maupun untuk mendukung KBM online. Fitur unggulan bank soal sekolah jenjang SD-SMA yang berkualitas, lengkap, dan update. Akses gratis puluhan ribu soal latihan matematika, IPA, IPS, bahasa Indonesia, bahasa Inggris, dan lainnya. Akses belajar soal-soal HOTS tersedia dalam layanan premium. Layanan kami juga tersedia lengkap di situs kejarcita.id.",
+    technologies: ["React Native", "Redux", "Kotlin", "Java", "Swift", "Ruby on Rails", "Google Play Store", "App Store", "Postman", "Figma"],
+    // Gunakan gambar rasio Portrait (misal 400x800) untuk simulasi mobile
+    images: ["assets/kc1.jpg", "assets/kc2.jpg", "assets/kc3.jpg", "assets/kc4.jpg", "assets/kc5.jpg", "assets/kc6.jpg"],
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.kejarcita",
+    appStoreUrl: "https://apps.apple.com/id/app/kejarcita/id1532648767"
+  },
+  {
+    id: 3,
     title: "Nihong Jastip",
     category: ProjectCategory.PERSONAL,
     type: ProjectType.WEB,
@@ -71,16 +97,15 @@ export const PROJECTS: Project[] = [
     repoUrl: "https://github.com/candrasdkd/nihong-jastip-company-profile"
   },
   {
-    id: 2,
-    title: "M-OK",
-    category: ProjectCategory.CLIENT,
-    type: ProjectType.MOBILE,
-    description: "M-OK, the official mobile application of KPP Mining",
-    fullDescription: "M-OK is an abbreviation of KPP mobile office, which is an internal application of PT Kalimanan Prima Persada that functions to provide facilities that support the work and personal needs of employees.",
-    technologies: ["React Native", "Redux", "Kotlin", "Java", "Swift", "GraphQL", "Postman", "SQL Server", "MonngoDB"],
-    // Gunakan gambar rasio Portrait (misal 400x800) untuk simulasi mobile
-    images: ["assets/mok1.png", "assets/mok2.png", "assets/mok3.png", "assets/mok4.png", "assets/mok5.png", "assets/mok6.png", "assets/mok7.png"],
-    playStoreUrl: "https://play.google.com/store/apps/details?id=com.kppmining.mok&pli=1",
-    appStoreUrl: "https://apps.apple.com/id/app/m-ok/id6456406607"
+    id: 4,
+    title: "Easy Sabil",
+    category: ProjectCategory.PERSONAL,
+    type: ProjectType.WEB,
+    description: "EasySabil adalah platform digital yang dirancang untuk mempermudah organisasi dalam melakukan pendataan, pengelolaan, dan pemantauan data anggotanya secara efisien dan terstruktur.",
+    fullDescription: "EasySabil adalah platform digital yang dirancang untuk mempermudah organisasi dalam melakukan pendataan, pengelolaan, dan pemantauan data anggotanya secara efisien dan terstruktur.",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Supabase"],
+    images: ["assets/es1.png", "assets/es2.png", "assets/es3.png"],
+    demoUrl: "https://easysabil.vercel.app",
+    repoUrl: "https://github.com/candrasdkd/easysabil-web"
   },
 ];
