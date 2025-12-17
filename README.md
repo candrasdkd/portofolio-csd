@@ -1,20 +1,41 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 👨‍💻 Personal Portfolio Website
 
-# Run and deploy your AI Studio app
+![Project Banner](public/banner-placeholder.png)
+A modern, responsive, and interactive portfolio website designed to showcase my work in **Mobile (React Native)** and **Web Development**. Built with a focus on smooth animations, clean UI, and specialized displays for mobile vs. web projects.
 
-This contains everything you need to run your app locally.
+## 🚀 Tech Stack
 
-View your app in AI Studio: https://ai.studio/apps/temp/4
+This project is built using the following technologies:
 
-## Run Locally
+* **Framework:** [React](https://reactjs.org/) (Vite)
+* **Language:** [TypeScript](https://www.typescriptlang.org/)
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+* **Animations:** [Framer Motion](https://www.framer.com/motion/)
+* **Icons:** [Lucide React](https://lucide.dev/)
+* **Deployment:** Vercel / Netlify (Recommended)
 
-**Prerequisites:**  Node.js
+## ✨ Key Features
 
+* **Dynamic Project Filtering:** Filter projects by categories (All, Personal, Client) with smooth layout transitions.
+* **Smart Layouts:**
+    * **Web Projects:** Displayed with `object-cover` and scrolling hover effects (optional).
+    * **Mobile Projects:** Displayed inside a container (`object-contain`) to preserve app aspect ratios.
+* **Interactive Modal:**
+    * Detailed view for each project without leaving the page.
+    * Image slider/carousel navigation.
+    * Direct links to Live Demo, Play Store, App Store, and GitHub Repo.
+* **Responsive Design:** Fully optimized for Desktop, Tablet, and Mobile screens.
+* **Dark Mode UI:** A sleek, developer-focused dark theme.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 📂 Project Structure
+
+```bash
+src/
+├── assets/          # Static assets (images, icons)
+├── components/      # Reusable components
+│   ├── ProjectModal.tsx  # Detailed view modal with slider
+│   ├── Projects.tsx      # Main grid with filtering logic
+│   └── ...
+├── constants/       # Static data (Project lists, details)
+├── types/           # TypeScript interfaces (Project, Category, etc.)
+└── App.tsx          # Main application entry
