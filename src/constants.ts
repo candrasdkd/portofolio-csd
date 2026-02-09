@@ -31,32 +31,34 @@ export const EXPERIENCE: ExperienceItem[] = [
     id: 1,
     role: "Frontend Developer",
     company: "CODE.ID",
+    clients: ["Prudential"],
     period: "Jan 2025 - Present",
-    description: "Responsible for developing and maintaining cross-platform mobile applications (Android & iOS) using React Native. The tasks include implementing UI/UX designs, integrating with RESTful APIs, fixing bugs, deploying applications to the App Store and Google Play Store, and ensuring smooth application performance across multiple devices."
+    type: "Contract",
+    techStack: ["React Native", "TypeScript", "Redux Toolkit", "Firebase"],
+    description: "Bertanggung jawab dalam pengembangan aplikasi mobile lintas platform menggunakan React Native, fokus pada fitur polis asuransi dan alur persetujuan.",
   },
   {
     id: 2,
-    role: "React Native Developer",
-    company: "PT Kalimantan Prima Persada",
-    period: "Apr 2022 - Dec 2025",
-    description: "Responsible for developing and maintaining cross-platform mobile applications (Android & iOS) using React Native. The tasks include implementing UI/UX designs, integrating with RESTful APIs, fixing bugs, deploying applications to the App Store and Google Play Store, and ensuring smooth application performance across multiple devices."
-  },
-  {
-    id: 3,
     role: "Freelance React Native Developer",
     company: "kejarcita.id",
     period: "Oct 2024 - Present",
-    description: "Responsible for developing and maintaining cross-platform mobile applications (Android & iOS) using React Native. The tasks include implementing UI/UX designs, integrating with RESTful APIs, fixing bugs, deploying applications to the App Store and Google Play Store, and ensuring smooth application performance across multiple devices."
+    type: "Freelance",
+    techStack: ["React Native",  "Android Native (Java)", "IOS Native (Swift/Objective-C)", "Redux Toolkit", "Firebase"],
+    description: "Mengembangkan fitur ujian aman, screen pinning, dan modul absensi pada aplikasi edukasi.",
   },
   {
-    id: 4,
+    id: 3,
     role: "React Native Developer",
-    company: "PT Multiartha Prima Sejahtera",
-    period: "Dec 2021 - Feb 2022",
-    description: "Responsibilities include implementing intuitive UX designs via clean code and collaborating with backend developers to integrate services. The role requires diagnosing and resolving application errors, maintaining code integrity through systematic reviews and version control management, and executing the end-to-end deployment process to the Google Play Store."
-  }
-];
+    company: "Sigmatech",
+    clients: ["PT Kalimantan Prima Persada"],
+    period: "Apr 2022 - Dec 2025",
+    type: "Contract",
+    techStack: ["React Native", "TypeScript", "Android Native (Java)", "IOS Native (Swift/Objective-C)", "Redux Toolkit"],
+    description: "Mengembangkan aplikasi mobile untuk operasional pertambangan, termasuk optimasi performa dan integrasi widget Android native.",
+    certificate: "/pdfs/paklaring_sigmatech.pdf"
+  },
 
+];
 export const PROJECTS: Project[] = [
   {
     id: 1,
@@ -87,7 +89,7 @@ export const PROJECTS: Project[] = [
   {
     id: 3,
     title: "Nihong Jastip",
-    category: ProjectCategory.PERSONAL,
+    category: ProjectCategory.CLIENT,
     type: ProjectType.WEB,
     description: "Nihong Jastip adalah website landing page untuk layanan jasa titip dan ekspedisi internasional Jepang–Indonesia. Website ini dirancang untuk membantu calon pelanggan memahami layanan, alur pemesanan, serta mempermudah komunikasi secara langsung melalui platform digital.",
     fullDescription: `Website Nihong Jastip berfungsi sebagai media informasi dan branding untuk bisnis jasa titip (jastip). Fokus utama pengembangan website ini adalah menghadirkan tampilan modern, responsif, dan mudah digunakan, sehingga pengguna dapat dengan cepat menemukan informasi layanan serta melakukan pemesanan. \n Website ini menampilkan penjelasan layanan, keunggulan bisnis, serta call-to-action yang terintegrasi langsung ke WhatsApp. Dengan desain yang ringan dan performa yang optimal, website ini cocok digunakan sebagai landing page bisnis jasa berbasis layanan.`,

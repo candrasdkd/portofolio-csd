@@ -57,7 +57,7 @@ const About: React.FC = () => {
                 <p className="text-gray-500 text-sm">Years Experience</p>
               </div>
               <div className="p-4 bg-card rounded-xl border border-gray-800">
-                <h4 className="text-3xl font-bold text-white mb-1">3+</h4>
+                <h4 className="text-3xl font-bold text-white mb-1">4+</h4>
                 <p className="text-gray-500 text-sm">Projects Completed</p>
               </div>
             </div>

@@ -30,8 +30,12 @@ export interface ExperienceItem {
   id: number;
   role: string;
   company: string;
+  clients?: string[];
   period: string;
   description: string;
+  certificate?: string;
+  type: 'Full-time' | 'Freelance' | 'Contract';
+  techStack: string[]; 
 }
 
 export interface Skill {
