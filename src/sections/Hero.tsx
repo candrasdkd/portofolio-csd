@@ -1,9 +1,73 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Download, Loader2 } from 'lucide-react';
 import { HERO_DATA } from '@/constants';
+import { toPng } from 'html-to-image';
+import jsPDF from 'jspdf';
+import CVTemplate from '@/components/CVTemplate';
+import { createRoot } from 'react-dom/client';
 
 const Hero: React.FC = () => {
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownloadCV = async () => {
+    setIsDownloading(true);
+    try {
+      // 1. Create a temporary container that is visible but absolutely positioned far away.
+      // html2canvas sometimes struggles with display: none or completely off-screen DOM nodes if they don't load styling/fonts.
+      const tempContainer = document.createElement('div');
+      tempContainer.style.position = 'absolute';
+      tempContainer.style.left = '-10000px';
+      tempContainer.style.top = '0px';
+      tempContainer.style.width = '210mm'; // A4 width
+      tempContainer.style.backgroundColor = 'white'; // ensure background is recorded
+      document.body.appendChild(tempContainer);
+
+      // 2. Render the CVTemplate component into the temporary container
+      const root = createRoot(tempContainer);
+
+      // We must wait for the React render to finish before capturing.
+      await new Promise<void>((resolve) => {
+        root.render(<CVTemplate />);
+        // Wait 1.5 seconds for fonts to load and the DOM layout to completely settle.
+        setTimeout(resolve, 1500);
+      });
+
+      // 3. Find the rendered template and capture it
+      const element = tempContainer.querySelector('#cv-template') as HTMLElement;
+      if (!element) throw new Error("Template not found");
+
+      await document.fonts.ready; // Explicitly ensure fonts are loaded 
+
+      const imgData = await toPng(element, {
+        quality: 1,
+        pixelRatio: 2,
+      });
+
+      const elemWidth = element.offsetWidth;
+      const elemHeight = element.offsetHeight;
+
+      const pdf = new jsPDF('p', 'mm', 'a4');
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (elemHeight * pdfWidth) / elemWidth;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`CV_${HERO_DATA.name.replace(/\s+/g, '_')}.pdf`);
+
+      // 4. Cleanup
+      root.unmount();
+      document.body.removeChild(tempContainer);
+
+    } catch (error) {
+      console.error('Failed to generate CV', error);
+      alert('Terdapat kesalahan saat mengunduh CV. Silakan coba lagi.');
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+
+
   return (
     <section id="home" className="min-h-screen relative flex items-center justify-center overflow-hidden bg-dark">
       {/* Background Blobs */}
@@ -28,16 +92,35 @@ const Hero: React.FC = () => {
             {HERO_DATA.tagline}
           </p>
 
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <a
               href="#projects"
-              className="px-8 py-4 bg-primary hover:bg-primary/90 text-white rounded-full font-semibold transition-all hover:scale-105 shadow-[0_0_20px_rgba(139,92,246,0.3)]"
+              className="px-6 py-3 md:px-8 md:py-4 bg-primary hover:bg-primary/90 text-white rounded-full font-semibold transition-all hover:scale-105 shadow-[0_0_20px_rgba(139,92,246,0.3)] w-full sm:w-auto"
             >
               View My Work
             </a>
+
+            <button
+              onClick={handleDownloadCV}
+              disabled={isDownloading}
+              className="px-6 py-3 md:px-8 md:py-4 bg-white text-gray-900 rounded-full font-semibold transition-all hover:scale-105 flex items-center justify-center gap-2 w-full sm:w-auto disabled:opacity-70 disabled:hover:scale-100"
+            >
+              {isDownloading ? (
+                <>
+                  <Loader2 size={20} className="animate-spin" />
+                  Generating...
+                </>
+              ) : (
+                <>
+                  <Download size={20} />
+                  Download CV
+                </>
+              )}
+            </button>
+
             <a
               href="#contact"
-              className="px-8 py-4 bg-transparent border border-gray-700 hover:border-gray-500 text-white rounded-full font-semibold transition-all hover:bg-gray-800"
+              className="px-6 py-3 md:px-8 md:py-4 bg-transparent border border-gray-700 hover:border-gray-500 text-white rounded-full font-semibold transition-all hover:bg-gray-800 w-full sm:w-auto"
             >
               Contact Me
             </a>
