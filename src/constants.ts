@@ -35,7 +35,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "Jan 2025 - Present",
     type: "Contract",
     techStack: ["React Native", "TypeScript", "Redux Toolkit", "Firebase"],
-    description: "Bertanggung jawab dalam pengembangan aplikasi mobile lintas platform menggunakan React Native, fokus pada fitur polis asuransi dan alur persetujuan.",
+    description: "Spearheaded the development of a cross-platform mobile application utilizing React Native. Key responsibilities involved engineering complex insurance policy features and streamlining approval workflows.",
   },
   {
     id: 2,
@@ -43,8 +43,8 @@ export const EXPERIENCE: ExperienceItem[] = [
     company: "kejarcita.id",
     period: "Oct 2024 - Present",
     type: "Freelance",
-    techStack: ["React Native",  "Android Native (Java)", "IOS Native (Swift/Objective-C)", "Redux Toolkit", "Firebase"],
-    description: "Mengembangkan fitur ujian aman, screen pinning, dan modul absensi pada aplikasi edukasi.",
+    techStack: ["React Native", "Android Native (Java)", "IOS Native (Swift/Objective-C)", "Redux Toolkit", "Firebase"],
+    description: "Developed and integrated advanced capabilities for a major educational application, including secure examination environments, screen pinning capabilities, and comprehensive attendance modules.",
   },
   {
     id: 3,
@@ -54,21 +54,20 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "Apr 2022 - Dec 2025",
     type: "Contract",
     techStack: ["React Native", "TypeScript", "Android Native (Java)", "IOS Native (Swift/Objective-C)", "Redux Toolkit"],
-    description: "Mengembangkan aplikasi mobile untuk operasional pertambangan, termasuk optimasi performa dan integrasi widget Android native.",
+    description: "Engineered scalable mobile applications specifically dedicated to streamlining mining operations. Led initiatives in performance optimization and seamlessly integrated native Android widgets for enhanced operability.",
     certificate: "/pdfs/paklaring_sigmatech.pdf"
   },
-
 ];
+
 export const PROJECTS: Project[] = [
   {
     id: 1,
     title: "M-OK",
     category: ProjectCategory.CLIENT,
     type: ProjectType.MOBILE,
-    description: "M-OK adalah singkatan dari mobile office KPP, yang merupakan aplikasi internal PT Kalimanan Prima Persada yang berfungsi untuk menyediakan fasilitas yang menunjang pekerjaan dan kebutuhan personal dari karyawan.",
-    fullDescription: "M-OK adalah singkatan dari mobile office KPP, yang merupakan aplikasi internal PT Kalimanan Prima Persada yang berfungsi untuk menyediakan fasilitas yang menunjang pekerjaan dan kebutuhan personal dari karyawan.",
+    description: "An internal mobile office application for PT Kalimantan Prima Persada (KPP) designed to provide facilities that support employee operations and streamline personal needs.",
+    fullDescription: "M-OK serves as the mobile office for KPP, acting as an internal application dedicated to PT Kalimantan Prima Persada. It provides comprehensive facilities and tools necessary for supporting the day-to-day operations and fulfilling the personal needs of employees seamlessly.",
     technologies: ["React Native", "Redux", "Kotlin", "Java", "Swift", "GraphQL", "Postman", "SQL Server", "MongoDB", "Google Play Store", "App Store", "Figma"],
-    // Gunakan gambar rasio Portrait (misal 400x800) untuk simulasi mobile
     images: ["assets/mok1.png", "assets/mok2.png", "assets/mok3.png", "assets/mok4.png", "assets/mok5.png", "assets/mok6.png", "assets/mok7.png"],
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.kppmining.mok",
     appStoreUrl: "https://apps.apple.com/id/app/m-ok/id6456406607"
@@ -78,10 +77,9 @@ export const PROJECTS: Project[] = [
     title: "Kejarcita",
     category: ProjectCategory.CLIENT,
     type: ProjectType.MOBILE,
-    description: "Kejarcita adalah platform pendidikan daring terbaik untuk siswa, guru, dan sekolah. Dapat digunakan untuk latihan mandiri maupun untuk mendukung KBM online.",
-    fullDescription: "Platform pendidikan daring terbaik untuk siswa, guru, dan sekolah. Dapat digunakan untuk latihan mandiri maupun untuk mendukung KBM online. Fitur unggulan bank soal sekolah jenjang SD-SMA yang berkualitas, lengkap, dan update. Akses gratis puluhan ribu soal latihan matematika, IPA, IPS, bahasa Indonesia, bahasa Inggris, dan lainnya. Akses belajar soal-soal HOTS tersedia dalam layanan premium. Layanan kami juga tersedia lengkap di situs kejarcita.id.",
+    description: "A premier online education platform for students, teachers, and schools that facilitates independent practice and supports highly accessible, high-quality online learning activities.",
+    fullDescription: "Reputed as a premier online education platform for students, teachers, and schools, Kejarcita serves dual purposes: promoting independent practice and assisting synchronous online learning. Key highlights include an expansive, repeatedly updated question bank accommodating elementary to high school criteria. The platform provides free access to thousands of educational exercises in Mathematics, Sciences, Social Studies, Indonesian, and English. Additionally, complex High-Order Thinking Skills (HOTS) questions are fully accommodated in premium subscriptions.",
     technologies: ["React Native", "Redux", "Kotlin", "Java", "Swift", "Ruby on Rails", "Google Play Store", "App Store", "Postman", "Figma"],
-    // Gunakan gambar rasio Portrait (misal 400x800) untuk simulasi mobile
     images: ["assets/kc1.jpg", "assets/kc2.jpg", "assets/kc3.jpg", "assets/kc4.jpg", "assets/kc5.jpg", "assets/kc6.jpg"],
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.kejarcita",
     appStoreUrl: "https://apps.apple.com/id/app/kejarcita/id1532648767"
@@ -91,8 +89,8 @@ export const PROJECTS: Project[] = [
     title: "Nihong Jastip",
     category: ProjectCategory.CLIENT,
     type: ProjectType.WEB,
-    description: "Nihong Jastip adalah website landing page untuk layanan jasa titip dan ekspedisi internasional Jepang–Indonesia. Website ini dirancang untuk membantu calon pelanggan memahami layanan, alur pemesanan, serta mempermudah komunikasi secara langsung melalui platform digital.",
-    fullDescription: `Website Nihong Jastip berfungsi sebagai media informasi dan branding untuk bisnis jasa titip (jastip). Fokus utama pengembangan website ini adalah menghadirkan tampilan modern, responsif, dan mudah digunakan, sehingga pengguna dapat dengan cepat menemukan informasi layanan serta melakukan pemesanan. \n Website ini menampilkan penjelasan layanan, keunggulan bisnis, serta call-to-action yang terintegrasi langsung ke WhatsApp. Dengan desain yang ringan dan performa yang optimal, website ini cocok digunakan sebagai landing page bisnis jasa berbasis layanan.`,
+    description: "A responsive landing page designed for a Japan-Indonesia international personal shopping and shipping service, assisting users in understanding operations and effortlessly initiating orders.",
+    fullDescription: "The Nihong Jastip website acts primarily as an informational hub and a strong branding medium for the personal shopping (jastip) enterprise. Key development focused on crafting a modern, fully responsive, and straightforward interface so prospective users quickly understand service particulars and seamlessly submit orders. The website encompasses detailed service explanations, core business advantages, and strategically positioned call-to-actions directly connected to WhatsApp for rapid inquiries.",
     technologies: ["React", "Javascript"],
     images: ["assets/jastip1.png", "assets/jastip2.png", "assets/jastip3.png"],
     demoUrl: "https://nihongjastip.vercel.app",
@@ -103,8 +101,8 @@ export const PROJECTS: Project[] = [
     title: "Easy Sabil",
     category: ProjectCategory.PERSONAL,
     type: ProjectType.WEB,
-    description: "EasySabil adalah platform digital yang dirancang untuk mempermudah organisasi dalam melakukan pendataan, pengelolaan, dan pemantauan data anggotanya secara efisien dan terstruktur.",
-    fullDescription: "EasySabil adalah platform digital yang dirancang untuk mempermudah organisasi dalam melakukan pendataan, pengelolaan, dan pemantauan data anggotanya secara efisien dan terstruktur.",
+    description: "A specialized digital platform architected to facilitate organizations in efficiently registering, managing, and continually assessing their member base comprehensively.",
+    fullDescription: "EasySabil shines as a digital organizational platform inherently designed to streamline various organizational tasks. These entail conducting highly efficient data collection, seamlessly administrating member information, and meticulously monitoring the member base through an efficient, centralized, and structured infrastructure.",
     technologies: ["React", "TypeScript", "Tailwind CSS", "Supabase"],
     images: ["assets/es1.png", "assets/es2.png", "assets/es3.png"],
     demoUrl: "https://easysabil.vercel.app",
