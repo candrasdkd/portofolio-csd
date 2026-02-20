@@ -1,13 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, Download, Loader2 } from 'lucide-react';
 import { HERO_DATA } from '@/constants';
-import { toPng } from 'html-to-image';
-import jsPDF from 'jspdf';
-import CVTemplate from '@/components/CVTemplate';
-import { createRoot } from 'react-dom/client';
+import { useTranslation } from 'react-i18next';
 
 const Hero: React.FC = () => {
+  const { t } = useTranslation();
   const [isDownloading, setIsDownloading] = useState(false);
 
   const handleDownloadCV = async () => {
@@ -22,6 +20,19 @@ const Hero: React.FC = () => {
       tempContainer.style.width = '210mm'; // A4 width
       tempContainer.style.backgroundColor = 'white'; // ensure background is recorded
       document.body.appendChild(tempContainer);
+
+      // Dynamically import heavy libraries only when needed
+      const [
+        { toPng },
+        { default: jsPDF },
+        { createRoot },
+        { default: CVTemplate }
+      ] = await Promise.all([
+        import('html-to-image'),
+        import('jspdf'),
+        import('react-dom/client'),
+        import('@/components/CVTemplate')
+      ]);
 
       // 2. Render the CVTemplate component into the temporary container
       const root = createRoot(tempContainer);
@@ -83,12 +94,12 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <span className="inline-block px-4 py-2 rounded-full bg-gray-800/50 border border-gray-700 text-primary text-sm font-medium mb-6 backdrop-blur-sm">
-            Hello, I'm {HERO_DATA.name}
+            {t('hero.greeting')} {HERO_DATA.name}
           </span>
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight transition-colors">
             {HERO_DATA.role}
           </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed transition-colors">
             {HERO_DATA.tagline}
           </p>
 
@@ -97,32 +108,32 @@ const Hero: React.FC = () => {
               href="#projects"
               className="px-6 py-3 md:px-8 md:py-4 bg-primary hover:bg-primary/90 text-white rounded-full font-semibold transition-all hover:scale-105 shadow-[0_0_20px_rgba(139,92,246,0.3)] w-full sm:w-auto"
             >
-              View My Work
+              {t('hero.viewWork')}
             </a>
 
             <button
               onClick={handleDownloadCV}
               disabled={isDownloading}
-              className="px-6 py-3 md:px-8 md:py-4 bg-white text-gray-900 rounded-full font-semibold transition-all hover:scale-105 flex items-center justify-center gap-2 w-full sm:w-auto disabled:opacity-70 disabled:hover:scale-100"
+              className="px-6 py-3 md:px-8 md:py-4 bg-gray-800 dark:bg-white text-white dark:text-gray-900 rounded-full font-semibold transition-all hover:scale-105 flex items-center justify-center gap-2 w-full sm:w-auto disabled:opacity-70 disabled:hover:scale-100"
             >
               {isDownloading ? (
                 <>
                   <Loader2 size={20} className="animate-spin" />
-                  Generating...
+                  {t('hero.generating')}
                 </>
               ) : (
                 <>
                   <Download size={20} />
-                  Download CV
+                  {t('hero.downloadCV')}
                 </>
               )}
             </button>
 
             <a
               href="#contact"
-              className="px-6 py-3 md:px-8 md:py-4 bg-transparent border border-gray-700 hover:border-gray-500 text-white rounded-full font-semibold transition-all hover:bg-gray-800 w-full sm:w-auto"
+              className="px-6 py-3 md:px-8 md:py-4 bg-transparent border border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-500 text-gray-800 dark:text-white rounded-full font-semibold transition-all hover:bg-gray-100 dark:hover:bg-gray-800 w-full sm:w-auto"
             >
-              Contact Me
+              {t('hero.contactMe')}
             </a>
           </div>
 

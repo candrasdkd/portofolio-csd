@@ -4,8 +4,10 @@ import { PROJECTS } from '@/constants';
 import { Project, ProjectCategory, ProjectType } from '@/types';
 import ProjectModal from '@/components/ProjectModal';
 import { Layers, Smartphone, Globe, Monitor } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Projects: React.FC = () => {
+  const { t } = useTranslation();
   const [filter, setFilter] = useState<ProjectCategory | 'All'>('All');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -43,28 +45,28 @@ const Projects: React.FC = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-white mb-4 flex items-center justify-center gap-3">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3 transition-colors">
             <Layers className="text-primary" />
-            Featured Projects
+            {t('projects.title')}
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            A selection of my recent work across mobile and web development.
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto transition-colors">
+            {t('projects.subtitle')}
           </p>
         </motion.div>
 
         {/* Filter Controls */}
         <div className="flex justify-center mb-12">
-          <div className="bg-card p-1 rounded-xl flex gap-1 border border-gray-800">
+          <div className="bg-gray-100 dark:bg-card p-1 rounded-xl flex gap-1 border border-gray-200 dark:border-gray-800 transition-colors">
             {['All', ProjectCategory.PERSONAL, ProjectCategory.CLIENT].map((cat) => (
               <button
                 key={cat}
                 onClick={() => handleFilterChange(cat as ProjectCategory | 'All')}
                 className={`px-6 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${filter === cat
                   ? 'bg-primary text-white shadow-lg'
-                  : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-800'
                   }`}
               >
-                {cat}
+                {cat === 'All' ? t('experience.all') : cat}
               </button>
             ))}
           </div>
@@ -109,11 +111,11 @@ const Projects: React.FC = () => {
               </div>
 
               {/* Content */}
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
+              <div className="p-6 flex flex-col flex-grow bg-white dark:bg-card transition-colors">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-gray-400 text-sm mb-4 line-clamp-2 flex-grow">
+                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2 flex-grow transition-colors">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-auto">
