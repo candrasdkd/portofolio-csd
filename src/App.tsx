@@ -33,8 +33,8 @@ const App: React.FC = () => {
             <Hero />
             <About />
             <Skills />
-            <Projects />
             <Experience />
+            <Projects />
             <Contact />
           </main>
         </div>

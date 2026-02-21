@@ -10,21 +10,48 @@ const Navbar: React.FC = () => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    // Active Section Detection
+    const sections = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
+    const observerOptions = {
+      root: null,
+      rootMargin: '-40% 0px -40% 0px',
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    sections.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   const navLinks = [
-    { name: t('nav.about'), href: '#about' },
-    { name: t('nav.skills'), href: '#skills' },
-    { name: t('nav.experience'), href: '#experience' },
-    { name: t('nav.projects'), href: '#projects' },
-    { name: t('nav.contact'), href: '#contact' },
+    { name: t('nav.about'), id: 'about', href: '#about' },
+    { name: t('nav.skills'), id: 'skills', href: '#skills' },
+    { name: t('nav.experience'), id: 'experience', href: '#experience' },
+    { name: t('nav.projects'), id: 'projects', href: '#projects' },
+    { name: t('nav.contact'), id: 'contact', href: '#contact' },
   ];
 
   return (
@@ -46,10 +73,12 @@ const Navbar: React.FC = () => {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
+              className={`text-sm font-medium transition-colors relative group ${activeSection === link.id ? 'text-white' : 'text-gray-300 hover:text-white'
+                }`}
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+              <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all ${activeSection === link.id ? 'w-full' : 'w-0 group-hover:w-full'
+                }`} />
             </a>
           ))}
           <a
@@ -89,7 +118,8 @@ const Navbar: React.FC = () => {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="text-gray-300 hover:text-primary py-2 text-lg font-medium"
+                  className={`py-2 text-lg font-medium transition-colors ${activeSection === link.id ? 'text-primary' : 'text-gray-300 hover:text-primary'
+                    }`}
                 >
                   {link.name}
                 </a>
