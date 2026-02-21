@@ -28,8 +28,8 @@ const Skills: React.FC = () => {
               key={skill.name}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.4, delay: index * 0.03 }}
               whileHover={{ y: -5, borderColor: '#8b5cf6' }}
               className="bg-gray-50 dark:bg-card p-6 rounded-xl border border-gray-200 dark:border-gray-800 flex flex-col items-center justify-center gap-4 text-center transition-colors group"
             >

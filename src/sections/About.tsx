@@ -14,7 +14,8 @@ const About: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5 }}
             className="relative"
           >
             {/* Image Frame Effect */}
@@ -35,7 +36,8 @@ const About: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5 }}
           >
             <div className="flex items-center gap-2 text-primary font-semibold mb-4">
               <User size={20} />

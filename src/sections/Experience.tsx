@@ -41,8 +41,8 @@ const Experience: React.FC = () => {
                 key={keyName}
                 onClick={() => setFilter(keyName as any)}
                 className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${filter === keyName
-                    ? 'bg-primary border-primary text-white dark:text-dark shadow-[0_0_15px_rgba(var(--primary-rgb),0.4)]'
-                    : 'bg-transparent border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-gray-400 dark:hover:border-gray-500'
+                  ? 'bg-primary border-primary text-white dark:text-dark shadow-[0_0_15px_rgba(var(--primary-rgb),0.4)]'
+                  : 'bg-transparent border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-gray-400 dark:hover:border-gray-500'
                   }`}
               >
                 {t(`experience.${keyName.toLowerCase()}`)}
@@ -60,10 +60,11 @@ const Experience: React.FC = () => {
               <motion.div
                 key={item.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.4 }}
                 className={`relative flex flex-col md:flex-row gap-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
               >
                 <div className="absolute left-4 md:left-1/2 top-0 w-4 h-4 rounded-full bg-primary border-4 border-dark -translate-x-1/2 z-10" />
@@ -74,8 +75,8 @@ const Experience: React.FC = () => {
                     <div className="flex justify-between items-start mb-2">
                       <span className="text-primary text-sm font-mono font-semibold">{item.period}</span>
                       <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border ${item.type === 'Freelance'
-                          ? 'border-orange-500/50 text-orange-500 bg-orange-500/10'
-                          : 'border-blue-500/50 text-blue-500 bg-blue-500/10'
+                        ? 'border-orange-500/50 text-orange-500 bg-orange-500/10'
+                        : 'border-blue-500/50 text-blue-500 bg-blue-500/10'
                         }`}>
                         {t(`experience.${item.type.toLowerCase()}`)}
                       </span>
