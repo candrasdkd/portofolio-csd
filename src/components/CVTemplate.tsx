@@ -24,7 +24,7 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ photoSrc }) => {
             }}
         >
             {/* Left Sidebar */}
-            <div style={{ width: '32%', backgroundColor: '#f8fafc', padding: '40px 30px', borderRight: '1px solid #e2e8f0' }}>
+            <div style={{ width: '30%', backgroundColor: '#f8fafc', padding: '30px 25px', borderRight: '1px solid #e2e8f0' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
                     {/* Profile Picture */}
                     <div style={{ width: '130px', height: '130px', borderRadius: '50%', overflow: 'hidden', border: '4px solid #ffffff', marginBottom: '15px' }}>
@@ -81,8 +81,8 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ photoSrc }) => {
             </div>
 
             {/* Right Main Content */}
-            <div style={{ width: '68%', padding: '40px 45px', backgroundColor: '#ffffff' }}>
-                <div style={{ marginBottom: '35px' }}>
+            <div style={{ width: '70%', padding: '30px 35px', backgroundColor: '#ffffff' }}>
+                <div style={{ marginBottom: '25px' }}>
                     <h1 style={{ fontSize: '42px', fontWeight: 800, color: '#0f172a', margin: '0 0 5px 0', letterSpacing: '-1px', lineHeight: 1.1 }}>
                         {HERO_DATA.name}
                     </h1>
@@ -95,7 +95,7 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ photoSrc }) => {
                     <h3 style={{ fontSize: '16px', fontWeight: 800, textTransform: 'uppercase', color: '#0f172a', borderBottom: '2px solid #e2e8f0', paddingBottom: '6px', marginBottom: '15px', letterSpacing: '0.05em' }}>
                         Professional Profile
                     </h3>
-                    <p style={{ fontSize: '13px', color: '#475569', lineHeight: 1.7, margin: 0, textAlign: 'justify' }}>
+                    <p style={{ fontSize: '12px', color: '#475569', lineHeight: 1.6, margin: 0, textAlign: 'justify' }}>
                         {HERO_DATA.description} I specialize in building responsive web applications and high-performance mobile apps, focusing heavily on modern UI/UX principles and clean, maintainable code architectures that deliver exceptional user experiences.
                     </p>
                 </div>
@@ -104,7 +104,7 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ photoSrc }) => {
                     <h3 style={{ fontSize: '16px', fontWeight: 800, textTransform: 'uppercase', color: '#0f172a', borderBottom: '2px solid #e2e8f0', paddingBottom: '6px', marginBottom: '20px', letterSpacing: '0.05em' }}>
                         Work Experience
                     </h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
                         {EXPERIENCE.map(exp => (
                             <div key={exp.id}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
@@ -116,12 +116,12 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ photoSrc }) => {
                                         {exp.period}
                                     </div>
                                 </div>
-                                <p style={{ fontSize: '13px', color: '#475569', lineHeight: 1.6, margin: '10px 0', textAlign: 'justify' }}>
+                                <p style={{ fontSize: '12px', color: '#475569', lineHeight: 1.5, margin: '6px 0', textAlign: 'justify' }}>
                                     {exp.description}
                                 </p>
-                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '12px' }}>
+                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '8px' }}>
                                     {exp.techStack.map(tech => (
-                                        <span key={tech} style={{ fontSize: '11px', fontWeight: 500, color: '#334155', backgroundColor: '#f8fafc', padding: '4px 8px', borderRadius: '4px', border: '1px solid #cbd5e1', display: 'inline-block', whiteSpace: 'nowrap', boxSizing: 'border-box', verticalAlign: 'middle' }}>
+                                        <span key={tech} style={{ fontSize: '10px', fontWeight: 500, color: '#334155', backgroundColor: '#f8fafc', padding: '3px 6px', borderRadius: '4px', border: '1px solid #cbd5e1', display: 'inline-block', whiteSpace: 'nowrap', boxSizing: 'border-box', verticalAlign: 'middle' }}>
                                             {tech}
                                         </span>
                                     ))}

@@ -10,11 +10,6 @@ const Experience: React.FC = () => {
 
   const filteredExperience = EXPERIENCE
     .filter(item => filter === 'All' || item.type === filter)
-    .sort((a, b) => {
-      if (a.period.includes("Present") && !b.period.includes("Present")) return -1;
-      if (!a.period.includes("Present") && b.period.includes("Present")) return 1;
-      return b.id - a.id;
-    });
 
   const handleViewCertificate = (pdfUrl: string) => {
     window.open(pdfUrl, '_blank');

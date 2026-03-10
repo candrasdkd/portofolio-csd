@@ -32,7 +32,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     role: "Frontend Developer",
     company: "CODE.ID",
     clients: ["Prudential"],
-    period: "Jan 2025 - Present",
+    period: "Jan 2026 - Present",
     type: "Contract",
     techStack: ["React Native", "TypeScript", "Redux Toolkit", "Firebase"],
     description: "Spearheaded the development of a cross-platform mobile application utilizing React Native. Key responsibilities involved engineering complex insurance policy features and streamlining approval workflows.",
@@ -56,6 +56,17 @@ export const EXPERIENCE: ExperienceItem[] = [
     techStack: ["React Native", "TypeScript", "Android Native (Java)", "IOS Native (Swift/Objective-C)", "Redux Toolkit"],
     description: "Engineered scalable mobile applications specifically dedicated to streamlining mining operations. Led initiatives in performance optimization and seamlessly integrated native Android widgets for enhanced operability.",
     certificate: "/pdfs/paklaring_sigmatech.pdf"
+  },
+  {
+    id: 4,
+    role: "React Native Developer",
+    company: "PT Multiartha Prima Sejahtera",
+    clients: ["SekolahPintar.com"],
+    period: "Dec 2021 - Feb 2022",
+    type: "Contract",
+    techStack: ["React Native", "Redux Thunk"],
+    description: "Deplaza is a mobile application that provides product buying and selling services, which by using this application will make it easier for users to carry out buying and selling transactions, users can sell products with the facilities provided by Deplaza, or sell their own products.",
+    certificate: ""
   },
 ];
 
@@ -94,16 +105,28 @@ export const PROJECTS: Project[] = [
     technologies: ["React", "Javascript"],
     images: ["assets/jastip1.png", "assets/jastip2.png", "assets/jastip3.png"],
     demoUrl: "https://nihongjastip.vercel.app",
-    repoUrl: "https://github.com/candrasdkd/nihong-jastip-company-profile"
+    repoUrl: ""
   },
   {
     id: 4,
+    title: "Nihong Team",
+    category: ProjectCategory.CLIENT,
+    type: ProjectType.WEB,
+    description: "A feature-rich admin dashboard for NihongTeam's Jastip service, enabling admins to manage products, orders, and users through an intuitive and responsive interface.",
+    fullDescription: "Jastip Admin is a comprehensive internal dashboard developed for NihongTeam's Japan-Indonesia personal shopping (jastip) business. Admins can monitor order statistics and performance metrics via an analytics dashboard, manage product listings with image uploads and categorization, handle admin accounts with role-based access control, update order statuses, and configure system-wide settings. Built with React, TypeScript, and Vite for a fast development experience, the UI is styled with TailwindCSS and animated with Framer Motion. Firebase powers the backend for real-time data and authentication, Recharts drives the analytics visualizations, and jsPDF with html2canvas enables PDF export. The app is deployed as a Progressive Web App (PWA) on Vercel.",
+    technologies: ["React", "TypeScript", "Vite", "TailwindCSS", "Firebase", "Framer Motion", "Recharts", "jsPDF", "PWA"],
+    images: ["assets/nihongteam1.png", "assets/nihongteam2.png", "assets/nihongteam3.png", "assets/nihongteam4.png"],
+    demoUrl: "https://nihongteam.vercel.app",
+    repoUrl: ""
+  },
+  {
+    id: 5,
     title: "Easy Sabil",
     category: ProjectCategory.PERSONAL,
     type: ProjectType.WEB,
-    description: "A specialized digital platform architected to facilitate organizations in efficiently registering, managing, and continually assessing their member base comprehensively.",
-    fullDescription: "EasySabil shines as a digital organizational platform inherently designed to streamline various organizational tasks. These entail conducting highly efficient data collection, seamlessly administrating member information, and meticulously monitoring the member base through an efficient, centralized, and structured infrastructure.",
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Supabase"],
+    description: "A comprehensive web app for managing community data, sensus records, orders, and attendance — with role-based access control and real-time analytics powered by Firebase.",
+    fullDescription: "EasySabil is a full-featured community management platform built for organizations handling census data, financial orders, and daily attendance. Admins and coordinators can manage family units and individual members with bulk Excel import and rollback support, while role-based access control (Admin, Coordinator, Member) filters data visibility per user. The orders module supports full CRUD on purchase categories and transactions with payment tracking, and the attendance module logs daily or monthly records interactively. A real-time analytics dashboard aggregates census metrics directly from Firebase Firestore, replacing external sheet dependencies. The UI features a clean blue-themed design with a modern split-layout for authentication.",
+    technologies: ["React", "TypeScript", "Vite", "TailwindCSS", "Firebase", "Recharts", "Lucide React", "xlsx", "PWA"],
     images: ["assets/es1.png", "assets/es2.png", "assets/es3.png"],
     demoUrl: "https://easysabil.vercel.app",
     repoUrl: "https://github.com/candrasdkd/easysabil-web"
