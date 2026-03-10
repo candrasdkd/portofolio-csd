@@ -34,12 +34,27 @@ const Hero: React.FC = () => {
         import('@/components/CVTemplate')
       ]);
 
+      // Convert profile photo to base64 so html-to-image can embed it correctly
+      // (relative URLs are not resolved when rendering off-screen)
+      let photoSrc: string | undefined;
+      try {
+        const res = await fetch('/assets/me.jpg');
+        const blob = await res.blob();
+        photoSrc = await new Promise<string>((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result as string);
+          reader.readAsDataURL(blob);
+        });
+      } catch {
+        console.warn('Could not load profile photo for CV');
+      }
+
       // 2. Render the CVTemplate component into the temporary container
       const root = createRoot(tempContainer);
 
       // We must wait for the React render to finish before capturing.
       await new Promise<void>((resolve) => {
-        root.render(<CVTemplate />);
+        root.render(<CVTemplate photoSrc={photoSrc} />);
         // Wait 1.5 seconds for fonts to load and the DOM layout to completely settle.
         setTimeout(resolve, 1500);
       });
@@ -48,22 +63,102 @@ const Hero: React.FC = () => {
       const element = tempContainer.querySelector('#cv-template') as HTMLElement;
       if (!element) throw new Error("Template not found");
 
-      await document.fonts.ready; // Explicitly ensure fonts are loaded 
+      // Belt-and-suspenders: manually set the img src at DOM level and wait for load.
+      // html-to-image can sometimes drop React-prop-injected base64 images during cloning.
+      if (photoSrc) {
+        const imgEl = element.querySelector('img') as HTMLImageElement | null;
+        if (imgEl) {
+          imgEl.src = photoSrc;
+          await new Promise<void>((resolve) => {
+            if (imgEl.complete && imgEl.naturalWidth > 0) {
+              resolve();
+            } else {
+              imgEl.onload = () => resolve();
+              imgEl.onerror = () => resolve();
+            }
+          });
+        }
+      }
+
+      await document.fonts.ready; // Explicitly ensure fonts are loaded
 
       const imgData = await toPng(element, {
         quality: 1,
         pixelRatio: 2,
+        fetchRequestInit: { cache: 'force-cache' },
       });
 
       const elemWidth = element.offsetWidth;
       const elemHeight = element.offsetHeight;
+      const pixelRatio = 2;
+
+      // If we have the photo, composite it onto the captured canvas manually.
+      // This completely bypasses html-to-image's image handling for the profile photo.
+      let finalImgData = imgData;
+      if (photoSrc) {
+        try {
+          const canvas = document.createElement('canvas');
+          canvas.width = elemWidth * pixelRatio;
+          canvas.height = elemHeight * pixelRatio;
+          const ctx = canvas.getContext('2d')!;
+
+          // Draw the captured template PNG as the base layer
+          const baseImg = new Image();
+          await new Promise<void>((res, rej) => {
+            baseImg.onload = () => res();
+            baseImg.onerror = rej;
+            baseImg.src = imgData;
+          });
+          ctx.drawImage(baseImg, 0, 0);
+
+          // Load the profile photo
+          const photo = new Image();
+          await new Promise<void>((res, rej) => {
+            photo.onload = () => res();
+            photo.onerror = rej;
+            photo.src = photoSrc!;
+          });
+
+          // Calculate where the 130x130px circle is in the sidebar.
+          // Sidebar padding-top=40px, then center avatar section, circle starts ~40px from top of sidebar.  
+          // Avatar container: display flex, alignItems center, marginBottom 40px
+          // Circle is 130x130 at padding-left (30px within sidebar ~32% of width)
+          const sidebarWidth = elemWidth * 0.32;
+          const circleSize = 130; // px in DOM (not scaled)
+          const circleX = (sidebarWidth - circleSize) / 2; // centered in sidebar
+          const circleY = 40; // padding-top of sidebar
+          const scaledCircleX = circleX * pixelRatio;
+          const scaledCircleY = circleY * pixelRatio;
+          const scaledCircleSize = circleSize * pixelRatio;
+
+          // Clip to circle and draw photo
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(
+            scaledCircleX + scaledCircleSize / 2,
+            scaledCircleY + scaledCircleSize / 2,
+            scaledCircleSize / 2,
+            0,
+            Math.PI * 2,
+          );
+          ctx.closePath();
+          ctx.clip();
+          ctx.drawImage(photo, scaledCircleX, scaledCircleY, scaledCircleSize, scaledCircleSize);
+          ctx.restore();
+
+          finalImgData = canvas.toDataURL('image/png');
+        } catch (err) {
+          console.warn('Could not composite photo onto canvas:', err);
+          // fall through with the unmodified imgData
+        }
+      }
 
       const pdf = new jsPDF('p', 'mm', 'a4');
 
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (elemHeight * pdfWidth) / elemWidth;
 
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.addImage(finalImgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
       pdf.save(`CV_${HERO_DATA.name.replace(/\s+/g, '_')}.pdf`);
 
       // 4. Cleanup

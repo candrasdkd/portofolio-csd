@@ -2,8 +2,12 @@ import React from 'react';
 import { HERO_DATA, SKILLS, EXPERIENCE, PROJECTS } from '@/constants';
 import { ProjectCategory } from '@/types';
 
+interface CVTemplateProps {
+    photoSrc?: string;
+}
+
 // This component is explicitly designed for A4 size rendering (approx 794x1123 px at 96 DPI)
-const CVTemplate: React.FC = () => {
+const CVTemplate: React.FC<CVTemplateProps> = ({ photoSrc }) => {
     return (
         <div
             id="cv-template"
@@ -23,23 +27,18 @@ const CVTemplate: React.FC = () => {
             <div style={{ width: '32%', backgroundColor: '#f8fafc', padding: '40px 30px', borderRight: '1px solid #e2e8f0' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
                     {/* Profile Picture */}
-                    <div style={{ width: '130px', height: '130px', borderRadius: '50%', overflow: 'hidden', border: '4px solid #ffffff', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)', marginBottom: '15px' }}>
-                        <img
-                            src="/assets/profile.png"
-                            alt={HERO_DATA.name}
-                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                            onError={(e) => {
-                                e.currentTarget.style.display = 'none';
-                                e.currentTarget.parentElement!.style.display = 'flex';
-                                e.currentTarget.parentElement!.style.alignItems = 'center';
-                                e.currentTarget.parentElement!.style.justifyContent = 'center';
-                                e.currentTarget.parentElement!.innerText = 'CSD';
-                                e.currentTarget.parentElement!.style.fontSize = '32px';
-                                e.currentTarget.parentElement!.style.color = '#9ca3af';
-                                e.currentTarget.parentElement!.style.fontWeight = 'bold';
-                                e.currentTarget.parentElement!.style.backgroundColor = '#e5e7eb';
-                            }}
-                        />
+                    <div style={{ width: '130px', height: '130px', borderRadius: '50%', overflow: 'hidden', border: '4px solid #ffffff', marginBottom: '15px' }}>
+                        {photoSrc ? (
+                            <img
+                                src={photoSrc}
+                                alt={HERO_DATA.name}
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                        ) : (
+                            <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#e5e7eb', fontSize: '32px', color: '#9ca3af', fontWeight: 'bold' }}>
+                                CSD
+                            </div>
+                        )}
                     </div>
                     <h2 style={{ fontSize: '18px', fontWeight: 800, textAlign: 'center', color: '#0f172a', margin: 0, lineHeight: 1.2 }}>
                         {HERO_DATA.name.split(' ').map((n, i) => i === 0 ? <span key={n} style={{ color: '#3b82f6' }}>{n} </span> : <span key={n}>{n} </span>)}

@@ -26,7 +26,7 @@ const About: React.FC = () => {
                  and change src to "/assets/profile.jpg" or import it.
                */}
               <img
-                src={"/assets/me.png"}
+                src={"/assets/me.jpg"}
                 alt="Profile"
                 className="w-full h-full object-cover"
               />
