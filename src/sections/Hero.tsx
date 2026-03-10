@@ -82,15 +82,15 @@ const Hero: React.FC = () => {
 
       await document.fonts.ready; // Explicitly ensure fonts are loaded
 
+      const pixelRatio = 1.5;
       const imgData = await toPng(element, {
-        quality: 1,
-        pixelRatio: 2,
+        quality: 0.92,
+        pixelRatio,
         fetchRequestInit: { cache: 'force-cache' },
       });
 
       const elemWidth = element.offsetWidth;
       const elemHeight = element.offsetHeight;
-      const pixelRatio = 2;
 
       // If we have the photo, composite it onto the captured canvas manually.
       // This completely bypasses html-to-image's image handling for the profile photo.
@@ -146,7 +146,8 @@ const Hero: React.FC = () => {
           ctx.drawImage(photo, scaledCircleX, scaledCircleY, scaledCircleSize, scaledCircleSize);
           ctx.restore();
 
-          finalImgData = canvas.toDataURL('image/png');
+          // Use JPEG at 85% quality — much smaller than PNG with minimal visible loss
+          finalImgData = canvas.toDataURL('image/jpeg', 0.85);
         } catch (err) {
           console.warn('Could not composite photo onto canvas:', err);
           // fall through with the unmodified imgData
@@ -158,7 +159,8 @@ const Hero: React.FC = () => {
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (elemHeight * pdfWidth) / elemWidth;
 
-      pdf.addImage(finalImgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      const imgFormat = finalImgData.startsWith('data:image/jpeg') ? 'JPEG' : 'PNG';
+      pdf.addImage(finalImgData, imgFormat, 0, 0, pdfWidth, pdfHeight);
       pdf.save(`CV_${HERO_DATA.name.replace(/\s+/g, '_')}.pdf`);
 
       // 4. Cleanup
