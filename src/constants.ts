@@ -148,7 +148,7 @@ export const PROJECTS: Project[] = [
     description: "A comprehensive web app for managing community data, sensus records, orders, and attendance — with role-based access control and real-time analytics powered by Firebase.",
     fullDescription: "EasySabil is a full-featured community management platform built for organizations handling census data, financial orders, and daily attendance. Admins and coordinators can manage family units and individual members with bulk Excel import and rollback support, while role-based access control (Admin, Coordinator, Member) filters data visibility per user. The orders module supports full CRUD on purchase categories and transactions with payment tracking, and the attendance module logs daily or monthly records interactively. A real-time analytics dashboard aggregates census metrics directly from Firebase Firestore, replacing external sheet dependencies. The UI features a clean blue-themed design with a modern split-layout for authentication.",
     technologies: ["React", "TypeScript", "Vite", "TailwindCSS", "Firebase", "Recharts", "Lucide React", "xlsx", "PWA"],
-    images: ["assets/es1.png", "assets/es2.png", "assets/es3.png"],
+    images: ["assets/es1.jpg", "assets/es2.png", "assets/es3.png", "assets/es4.png", "assets/es5.png"],
     demoUrl: "https://easysabil.vercel.app",
     repoUrl: "https://github.com/candrasdkd/easysabil-web"
   },
