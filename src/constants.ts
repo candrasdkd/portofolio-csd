@@ -13,6 +13,7 @@ export const HERO_DATA = {
 
 export const SKILLS: Skill[] = [
   { name: "React / React Native", icon: "react", level: 90 },
+  { name: "Angular", icon: "angular", level: 70 },
   { name: "Swift", icon: "swift", level: 60 },
   { name: "Kotlin/Java", icon: "kt/java", level: 60 },
   { name: "TypeScript", icon: "ts", level: 80 },
@@ -30,12 +31,12 @@ export const EXPERIENCE: ExperienceItem[] = [
   {
     id: 1,
     role: "Frontend Developer",
-    company: "CODE.ID",
-    clients: ["Prudential"],
+    company: "Prudential Indonesia",
+    // clients: ["Prudential"],
     period: "Jan 2026 - Present",
     type: "Contract",
-    techStack: ["React Native", "TypeScript", "Redux Toolkit", "Firebase"],
-    description: "Spearheaded the development of a cross-platform mobile application utilizing React Native. Key responsibilities involved engineering complex insurance policy features and streamlining approval workflows.",
+    techStack: ["Angular", "React Native", "TypeScript", "Android Native (Java)", "IOS Native (Swift/Objective-C)", "Redux", "Firebase"],
+    description: "Spearheaded the development of a cross-platform mobile application for insurance agents to manage policies utilizing React Native, alongside a web admin dashboard using Angular for supervisors and managers overseeing agent activities. Key responsibilities involved engineering complex insurance policy features, building a hierarchical role management system, and streamlining approval workflows.",
   },
   {
     id: 2,
@@ -43,14 +44,14 @@ export const EXPERIENCE: ExperienceItem[] = [
     company: "kejarcita.id",
     period: "Oct 2024 - Present",
     type: "Freelance",
-    techStack: ["React Native", "Android Native (Java)", "IOS Native (Swift/Objective-C)", "Redux Toolkit", "Firebase"],
+    techStack: ["React Native", "Android Native (Java)", "IOS Native (Swift/Objective-C)", "Redux", "Firebase"],
     description: "Developed and integrated advanced capabilities for a major educational application, including secure examination environments, screen pinning capabilities, and comprehensive attendance modules.",
   },
   {
     id: 3,
     role: "React Native Developer",
-    company: "Sigmatech",
-    clients: ["PT Kalimantan Prima Persada"],
+    company: "PT Kalimantan Prima Persada",
+    // clients: ["PT Kalimantan Prima Persada"],
     period: "Apr 2022 - Dec 2025",
     type: "Contract",
     techStack: ["React Native", "TypeScript", "Android Native (Java)", "IOS Native (Swift/Objective-C)", "Redux Toolkit"],
@@ -60,8 +61,8 @@ export const EXPERIENCE: ExperienceItem[] = [
   {
     id: 4,
     role: "React Native Developer",
-    company: "PT Multiartha Prima Sejahtera",
-    clients: ["SekolahPintar.com"],
+    company: "SekolahPintar.com",
+    // clients: ["SekolahPintar.com"],
     period: "Dec 2021 - Feb 2022",
     type: "Contract",
     techStack: ["React Native", "Redux Thunk"],
