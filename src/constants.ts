@@ -73,6 +73,26 @@ export const EXPERIENCE: ExperienceItem[] = [
 
 export const PROJECTS: Project[] = [
   {
+    id: 6,
+    title: "PruHub",
+    category: ProjectCategory.CLIENT,
+    type: ProjectType.WEB,
+    description: "A comprehensive web admin dashboard for Prudential Indonesia, enabling supervisors and managers to oversee agent activities, manage hierarchical roles, and streamline insurance policy approval workflows.",
+    fullDescription: "PruHub is an internal web admin platform developed for Prudential Indonesia using Angular. It is designed for supervisors and managers to monitor and manage insurance agents under their hierarchy. Key features include a role-based management system with hierarchical access control, real-time visibility into agent performance and policy submissions, approval workflow management, and reporting dashboards. The platform ensures secure and structured oversight across multiple levels of the organization.",
+    technologies: ["Angular", "TypeScript", "Redux", "Firebase", "Figma"],
+    images: ["assets/pruhab1.jpg", "assets/pruhab2.jpg"],
+  },
+  {
+    id: 7,
+    title: "PruForce",
+    category: ProjectCategory.CLIENT,
+    type: ProjectType.MOBILE,
+    description: "A cross-platform mobile application for Prudential Indonesia insurance agents to manage policies, submit requests, and track performance — all from their smartphone.",
+    fullDescription: "PruForce is a React Native cross-platform mobile application built for Prudential Indonesia's insurance agents. It provides agents with a comprehensive suite of tools to manage their client portfolios, submit policy applications, track approval statuses, and monitor personal performance metrics. The app features a responsive and intuitive UI optimized for both Android and iOS, integrating with Prudential's enterprise backend systems for real-time data synchronization and secure transactions.",
+    technologies: ["React Native", "TypeScript", "Redux", "Android Native (Java)", "IOS Native (Swift/Objective-C)", "Firebase", "Figma"],
+    images: ["assets/pruforce1.jpeg", "assets/pruforce2.jpeg"],
+  },
+  {
     id: 1,
     title: "M-OK",
     category: ProjectCategory.CLIENT,
