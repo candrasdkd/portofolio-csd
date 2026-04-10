@@ -11,20 +11,35 @@ interface ProjectModalProps {
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isImgLoading, setIsImgLoading] = useState(true);
 
   useEffect(() => {
-    if (isOpen) setCurrentImageIndex(0);
+    if (isOpen) {
+      setCurrentImageIndex(0);
+      setIsImgLoading(true);
+    }
+  }, [isOpen, project]);
+
+  // Preload semua gambar saat modal dibuka agar ganti gambar instan
+  useEffect(() => {
+    if (!isOpen || !project) return;
+    project.images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
   }, [isOpen, project]);
 
   if (!project) return null;
 
   const nextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
+    setIsImgLoading(true);
     setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
   };
 
   const prevImage = (e: React.MouseEvent) => {
     e.stopPropagation();
+    setIsImgLoading(true);
     setCurrentImageIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
   };
 
@@ -62,12 +77,20 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
               }`}>
 
               <div className="relative w-full h-full flex items-center justify-center p-6">
+                {isImgLoading && (
+                  <div className="absolute inset-0 flex items-center justify-center z-10">
+                    <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                  </div>
+                )}
                 <img
+                  key={project.images[currentImageIndex]}
                   src={project.images[currentImageIndex]}
                   alt={project.title}
-                  className={`shadow-2xl ${isMobile
+                  onLoad={() => setIsImgLoading(false)}
+                  onLoadStart={() => setIsImgLoading(true)}
+                  className={`shadow-2xl transition-opacity duration-200 ${isImgLoading ? 'opacity-0' : 'opacity-100'} ${isMobile
                     ? 'max-h-full w-auto object-contain rounded-[2rem] border-4 border-gray-800'
-                    : 'w-full h-full object-contain bg-gray-900 rounded-lg' // <--- Ganti jadi ini
+                    : 'w-full h-full object-contain bg-gray-900 rounded-lg'
                     }`}
                 />
               </div>
