@@ -3,7 +3,8 @@ import { motion } from 'framer-motion';
 import { PROJECTS } from '@/constants';
 import { Project, ProjectCategory, ProjectType } from '@/types';
 import ProjectModal from '@/components/ProjectModal';
-import { Layers, Smartphone, Globe, Monitor } from 'lucide-react';
+import { generateAllProjectsPDF } from '@/utils/generatePortfolioPDF';
+import { Layers, Smartphone, Globe, Monitor, Download, Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const Projects: React.FC = () => {
@@ -11,6 +12,7 @@ const Projects: React.FC = () => {
   const [filter, setFilter] = useState<ProjectCategory | 'All'>('All');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const itemsPerPage = 4;
 
   const filteredProjects = useMemo(() => {
@@ -36,6 +38,19 @@ const Projects: React.FC = () => {
     setCurrentPage(1);
   };
 
+  const handleDownloadPDF = async () => {
+    setIsGeneratingPDF(true);
+    try {
+      // Download the currently filtered list or entire list? Better just download all.
+      await generateAllProjectsPDF(PROJECTS);
+    } catch (error) {
+      console.error('Failed to generate project PDF', error);
+      alert('Terdapat kesalahan saat membuat PDF.');
+    } finally {
+      setIsGeneratingPDF(false);
+    }
+  };
+
   return (
     <section id="projects" className="py-20 px-4 md:px-8 bg-darker">
       <div className="max-w-7xl mx-auto">
@@ -54,8 +69,8 @@ const Projects: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Filter Controls */}
-        <div className="flex justify-center mb-12">
+        {/* Filter Controls & Download Action */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
           <div className="bg-gray-100 dark:bg-card p-1 rounded-xl flex gap-1 border border-gray-200 dark:border-gray-800 transition-colors">
             {['All', ProjectCategory.PERSONAL, ProjectCategory.CLIENT].map((cat) => (
               <button
@@ -70,6 +85,19 @@ const Projects: React.FC = () => {
               </button>
             ))}
           </div>
+
+          <button
+            onClick={handleDownloadPDF}
+            disabled={isGeneratingPDF}
+            className="flex items-center gap-2 px-6 py-2.5 bg-gray-800 dark:bg-gray-800 hover:bg-gray-700 text-white rounded-lg text-sm font-bold transition-all border border-gray-700 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg"
+          >
+            {isGeneratingPDF ? (
+              <Loader2 size={16} className="animate-spin" />
+            ) : (
+              <Download size={16} />
+            )}
+            Download Portfolio (PDF)
+          </button>
         </div>
 
         {/* Project Grid */}
