@@ -3,7 +3,6 @@ import { Menu, X, Code2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import InstallPWA from './InstallPWA';
-import ThemeToggle from './ThemeToggle';
 import LanguageSelector from './LanguageSelector';
 
 const Navbar: React.FC = () => {
@@ -88,7 +87,6 @@ const Navbar: React.FC = () => {
             {t('nav.hireMe')}
           </a>
           <div className="flex items-center gap-3 border-l border-white/10 pl-5">
-            <ThemeToggle />
             <LanguageSelector />
           </div>
           <InstallPWA />
@@ -126,7 +124,6 @@ const Navbar: React.FC = () => {
               ))}
 
               <div className="flex items-center gap-4 pt-4 border-t border-gray-800">
-                <ThemeToggle />
                 <LanguageSelector />
               </div>
 
