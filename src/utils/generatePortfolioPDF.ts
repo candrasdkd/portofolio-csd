@@ -361,7 +361,7 @@ export const generateAllProjectsPDF = async (projects: Project[]): Promise<void>
   // ══════════════════════════════════════════════════
   // PAGE NUMBERS (footer on every page)
   // ══════════════════════════════════════════════════
-  const totalPages = (doc.internal as { getNumberOfPages: () => number }).getNumberOfPages();
+  const totalPages = (doc.internal as unknown as { getNumberOfPages: () => number }).getNumberOfPages();
   for (let i = 1; i <= totalPages; i++) {
     doc.setPage(i);
     doc.setFont('helvetica', 'normal');
