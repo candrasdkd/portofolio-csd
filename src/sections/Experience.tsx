@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { EXPERIENCE } from '@/constants';
-import { Briefcase, Code2, ExternalLink, FileText } from 'lucide-react';
+import { EXPERIENCE, EDUCATION } from '@/constants';
+import { Briefcase, Code2, ExternalLink, FileText, GraduationCap } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const Experience: React.FC = () => {
@@ -93,9 +93,17 @@ const Experience: React.FC = () => {
                       )}
                     </div>
 
-                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 italic">
-                      {item.description}
-                    </p>
+                    {Array.isArray(item.description) ? (
+                      <ul className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 list-disc list-outside ml-4 space-y-1">
+                        {item.description.map((point, i) => (
+                          <li key={i}>{point}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 italic">
+                        {item.description}
+                      </p>
+                    )}
 
                     <div className="flex flex-wrap gap-2 mb-6">
                       {item.techStack.map((tech, idx) => (
@@ -123,6 +131,47 @@ const Experience: React.FC = () => {
             ))}
           </AnimatePresence>
         </div>
+
+        {/* Education Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-20"
+        >
+          <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-10 flex items-center justify-center gap-3">
+            <GraduationCap className="text-primary" />
+            {t('education.title')}
+          </h3>
+
+          <div className="grid gap-6">
+            {EDUCATION.map((edu) => (
+              <motion.div
+                key={edu.id}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="p-6 bg-white dark:bg-card rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-primary/30 transition-all shadow-lg"
+              >
+                <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
+                  <div>
+                    <h4 className="text-xl font-bold text-gray-900 dark:text-white">{edu.school}</h4>
+                    <p className="text-primary font-medium">{edu.major}</p>
+                  </div>
+                  <div className="flex flex-col md:items-end">
+                    <span className="text-sm font-mono text-gray-500">{edu.period}</span>
+                    <span className="text-xs font-bold text-primary mt-1">{t('education.gpa')}: {edu.gpa}</span>
+                  </div>
+                </div>
+                {edu.description && (
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-4 leading-relaxed">
+                    {edu.description}
+                  </p>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -340,7 +340,7 @@ export const generateAllProjectsPDF = async (projects: Project[]): Promise<void>
         doc.setLineWidth(0.5);
 
         try {
-          doc.addImage(dataUrl, 'JPEG', currentX, startY, actualImgW, imgH);
+          doc.addImage(dataUrl, 'JPEG', currentX, startY, actualImgW, imgH, undefined, 'FAST');
           doc.roundedRect(currentX, startY, actualImgW, imgH, 2, 2, 'S'); // Outline stroke
         } catch {
           // ignore

@@ -32,7 +32,7 @@ export interface ExperienceItem {
   company: string;
   clients?: string[];
   period: string;
-  description: string;
+  description: string | string[];
   certificate?: string;
   type: 'Full-time' | 'Freelance' | 'Contract';
   techStack: string[]; 
@@ -42,4 +42,13 @@ export interface Skill {
   name: string;
   icon: string; // URL or Lucide component name logic
   level: number; // 0-100
+}
+
+export interface EducationItem {
+  id: number;
+  school: string;
+  major: string;
+  period: string;
+  gpa: string;
+  description?: string;
 }

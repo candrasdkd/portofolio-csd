@@ -39,6 +39,10 @@ const resources = {
                 freelance: "Freelance",
                 client: "at client:"
             },
+            education: {
+                title: "Education",
+                gpa: "GPA"
+            },
             projects: {
                 title: "Featured Projects",
                 subtitle: "A selection of my recent work across mobile and web development."
@@ -95,6 +99,10 @@ const resources = {
                 contract: "Kontrak",
                 freelance: "Pekerja Bebas",
                 client: "klien:"
+            },
+            education: {
+                title: "Pendidikan",
+                gpa: "IPK"
             },
             projects: {
                 title: "Proyek Pilihan",

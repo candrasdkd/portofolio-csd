@@ -1,10 +1,12 @@
-import { Project, ProjectCategory, ExperienceItem, Skill, ProjectType } from '@/types';
+import { Project, ProjectCategory, ExperienceItem, Skill, ProjectType, EducationItem } from '@/types';
 
 export const HERO_DATA = {
   name: "Candra Sidik Dermawan",
   role: "Frontend & Mobile Developer",
   tagline: "Building digital experiences that matter.",
   description: "I craft responsive websites and high-performance mobile applications with a focus on user experience and clean code.",
+  birthDate: "1997-11-07",
+  location: "Depok, Indonesia",
   socials: {
     github: 'https://github.com/candrasdkd',
     linkedin: 'https://www.linkedin.com/in/candrasdk/',
@@ -34,17 +36,49 @@ export const EXPERIENCE: ExperienceItem[] = [
     company: "Prudential Indonesia",
     period: "Jan 2026 - Present",
     type: "Contract",
-    techStack: ["Angular", "React Native", "TypeScript", "Android Native (Java)", "IOS Native (Swift/Objective-C)", "Redux", "Firebase"],
-    description: "Spearheaded the development of a cross-platform mobile application for insurance agents to manage policies utilizing React Native, alongside a web admin dashboard using Angular for supervisors and managers overseeing agent activities. Key responsibilities involved engineering complex insurance policy features, building a hierarchical role management system, and streamlining approval workflows.",
+    techStack: ["Angular", "React Native", "TypeScript", "Redux", "Android Native (Java)", "iOS Native (Swift/Objective-C)", "Firebase", "Figma"],
+    description: [
+      "Identify, analyze, and fix bugs on the PruHub web admin platform (Angular).",
+      "Develop and add new features to the resign agent module.",
+      "Fix bugs and add features on PruForce mobile app (React Native) for Android & iOS.",
+      "Add features to improve user experience in real-time data synchronization.",
+      "Collaborate with QA team to ensure features and bug fixes run optimally before release.",
+      "Perform code maintenance and light optimization on existing modules.",
+    ],
   },
   {
     id: 2,
     role: "Freelance React Native Developer",
-    company: "kejarcita.id",
+    company: "Kejarcita",
     period: "Oct 2024 - Present",
     type: "Freelance",
-    techStack: ["React Native", "Android Native (Java)", "IOS Native (Swift/Objective-C)", "Redux", "Firebase"],
-    description: "Developed and integrated advanced capabilities for a major educational application, including secure examination environments, screen pinning capabilities, and comprehensive attendance modules.",
+    techStack: ["React Native", "Redux", "Kotlin", "Java", "Swift", "Ruby on Rails", "Figma"],
+    description: [
+      "Develop and maintain features for Kejarcita's educational mobile app using React Native.",
+      "Built interactive practice modules for elementary to high school subject content.",
+      "Implemented synchronous learning features and an announcement notification system.",
+      "Managed app state with Redux and collaborated with the Ruby on Rails backend team.",
+      "Integrated API with Ruby on Rails backend and managed question data.",
+      "Performed testing, debugging, and optimization for Android and iOS.",
+      "Coordinated with the design team using Figma for UI/UX implementation.",
+    ],
+  },
+  {
+    id: 5,
+    role: "Freelance Frontend Developer",
+    company: "Nihong Jastip",
+    period: "Jan 2024 - Dec 2025",
+    type: "Freelance",
+    techStack: ["React", "JavaScript", "TypeScript", "Vite", "TailwindCSS", "Firebase", "Framer Motion", "Recharts", "jsPDF", "PWA", "Vercel"],
+    description: [
+      "Designed a modern, fully responsive company profile website using React.",
+      "Implemented WhatsApp-integrated call-to-action for a seamless ordering flow.",
+      "Built Nihong Team's internal admin dashboard as a PWA using TypeScript.",
+      "Developed order, product, and admin modules with role-based access control.",
+      "Integrated Firebase as backend for authentication and real-time data sync.",
+      "Built financial analytics with Recharts and PDF report export using jsPDF.",
+      "Implemented UI animations with Framer Motion and deployed on Vercel.",
+    ],
   },
   {
     id: 3,
@@ -52,20 +86,55 @@ export const EXPERIENCE: ExperienceItem[] = [
     company: "PT Kalimantan Prima Persada",
     period: "Apr 2022 - Dec 2025",
     type: "Contract",
-    techStack: ["React Native", "TypeScript", "Android Native (Java)", "IOS Native (Swift/Objective-C)", "Redux Toolkit"],
-    description: "Engineered scalable mobile applications specifically dedicated to streamlining mining operations. Led initiatives in performance optimization and seamlessly integrated native Android widgets for enhanced operability.",
+    techStack: ["React Native", "Redux", "Kotlin", "Java", "Swift", "GraphQL", "SQL Server", "MongoDB", "Figma"],
+    description: [
+      "Developed and maintained M-OK's internal mobile office app using React Native.",
+      "Built and optimized employee self-service features for daily operational needs.",
+      "Integrated GraphQL backend and managed application state management with Redux.",
+      "Handled native module integration using Kotlin/Java (Android) and Swift (iOS).",
+      "Coordinated with backend team in managing SQL Server and MongoDB databases.",
+      "Conducted code reviews, debugging, and performance optimization.",
+      "Published and managed app releases on Google Play Store and App Store.",
+    ],
     certificate: "/pdfs/paklaring_sigmatech.pdf"
   },
   {
     id: 4,
     role: "React Native Developer",
-    company: "SekolahPintar.com",
+    company: "PT Multi Artha Prima Sejahtera",
     period: "Dec 2021 - Feb 2022",
     type: "Contract",
-    techStack: ["React Native", "Redux Thunk"],
-    description: "Deplaza is a mobile application that provides product buying and selling services, which by using this application will make it easier for users to carry out buying and selling transactions, users can sell products with the facilities provided by Deplaza, or sell their own products.",
+    techStack: ["React Native", "Redux Thunk", "Axios", "React Navigation", "OneSignal", "Sentry"],
+    description: [
+      "Developed new features for the Deplaza mobile marketplace app using React Native.",
+      "Built product listing, search, cart management, and checkout with COD/bank transfer.",
+      "Implemented role-based UI for reseller and store modes with sorting features.",
+      "Integrated push notifications (OneSignal) and error monitoring (Sentry).",
+      "Managed state with Redux Thunk and REST API communication with Axios.",
+      "Built order tracking, proof of transfer upload, and fund withdrawal features.",
+      "Implemented social sharing, wishlist management, and real-time CS chat.",
+    ],
     certificate: ""
   },
+];
+
+export const EDUCATION: EducationItem[] = [
+  {
+    id: 1,
+    school: "Universitas Gunadarma",
+    major: "Teknik Industri",
+    period: "May 2016 - Nov 2020",
+    gpa: "3.36",
+    description: "Focused on industrial systems optimization and production management, applying engineering principles to improve efficiency and productivity."
+  },
+  {
+    id: 2,
+    school: "Fazztrack",
+    major: "Full Stack Mobile Developer",
+    period: "Jul 2021 - Oct 2021",
+    gpa: "",
+    description: "Intensive bootcamp focused on full-stack mobile development."
+  }
 ];
 
 export const PROJECTS: Project[] = [
@@ -122,7 +191,7 @@ export const PROJECTS: Project[] = [
     fullDescription: "The Nihong Jastip website acts primarily as an informational hub and a strong branding medium for the personal shopping (jastip) enterprise. Key development focused on crafting a modern, fully responsive, and straightforward interface so prospective users quickly understand service particulars and seamlessly submit orders. The website encompasses detailed service explanations, core business advantages, and strategically positioned call-to-actions directly connected to WhatsApp for rapid inquiries.",
     technologies: ["React", "Javascript"],
     images: ["assets/jastip1.png", "assets/jastip2.png", "assets/jastip3.png"],
-    demoUrl: "https://nihongjastip.vercel.app",
+    demoUrl: "https://nihongjastip.com",
     repoUrl: ""
   },
   {

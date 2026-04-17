@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
 
       // Dynamically import heavy libraries only when needed
       const [
-        { toPng },
+        { toJpeg },
         { default: jsPDF },
         { createRoot },
         { default: CVTemplate }
@@ -82,8 +82,8 @@ const Hero: React.FC = () => {
 
       await document.fonts.ready; // Explicitly ensure fonts are loaded
 
-      const pixelRatio = 1.5;
-      const imgData = await toPng(element, {
+      const pixelRatio = 1.35;
+      const imgData = await toJpeg(element, {
         quality: 0.92,
         pixelRatio,
         fetchRequestInit: { cache: 'force-cache' },
@@ -92,75 +92,14 @@ const Hero: React.FC = () => {
       const elemWidth = element.offsetWidth;
       const elemHeight = element.offsetHeight;
 
-      // If we have the photo, composite it onto the captured canvas manually.
-      // This completely bypasses html-to-image's image handling for the profile photo.
-      let finalImgData = imgData;
-      if (photoSrc) {
-        try {
-          const canvas = document.createElement('canvas');
-          canvas.width = elemWidth * pixelRatio;
-          canvas.height = elemHeight * pixelRatio;
-          const ctx = canvas.getContext('2d')!;
-
-          // Draw the captured template PNG as the base layer
-          const baseImg = new Image();
-          await new Promise<void>((res, rej) => {
-            baseImg.onload = () => res();
-            baseImg.onerror = rej;
-            baseImg.src = imgData;
-          });
-          ctx.drawImage(baseImg, 0, 0);
-
-          // Load the profile photo
-          const photo = new Image();
-          await new Promise<void>((res, rej) => {
-            photo.onload = () => res();
-            photo.onerror = rej;
-            photo.src = photoSrc!;
-          });
-
-          // Calculate where the 130x130px circle is in the sidebar.
-          // Sidebar padding-top=40px, then center avatar section, circle starts ~40px from top of sidebar.  
-          // Avatar container: display flex, alignItems center, marginBottom 40px
-          // Circle is 130x130 at padding-left (30px within sidebar ~32% of width)
-          const sidebarWidth = elemWidth * 0.32;
-          const circleSize = 130; // px in DOM (not scaled)
-          const circleX = (sidebarWidth - circleSize) / 2; // centered in sidebar
-          const circleY = 40; // padding-top of sidebar
-          const scaledCircleX = circleX * pixelRatio;
-          const scaledCircleY = circleY * pixelRatio;
-          const scaledCircleSize = circleSize * pixelRatio;
-
-          // Clip to circle and draw photo
-          ctx.save();
-          ctx.beginPath();
-          ctx.arc(
-            scaledCircleX + scaledCircleSize / 2,
-            scaledCircleY + scaledCircleSize / 2,
-            scaledCircleSize / 2,
-            0,
-            Math.PI * 2,
-          );
-          ctx.closePath();
-          ctx.clip();
-          ctx.drawImage(photo, scaledCircleX, scaledCircleY, scaledCircleSize, scaledCircleSize);
-          ctx.restore();
-
-          // Use JPEG at 85% quality — much smaller than PNG with minimal visible loss
-          finalImgData = canvas.toDataURL('image/jpeg', 0.85);
-        } catch (err) {
-          console.warn('Could not composite photo onto canvas:', err);
-          // fall through with the unmodified imgData
-        }
-      }
-
+      // Photo is now rendered correctly by the React component,
+      // so we can use the captured image directly without manual compositing.
       const pdf = new jsPDF('p', 'mm', 'a4');
 
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (elemHeight * pdfWidth) / elemWidth;
 
-      const imgFormat = finalImgData.startsWith('data:image/jpeg') ? 'JPEG' : 'PNG';
-      pdf.addImage(finalImgData, imgFormat, 0, 0, pdfWidth, pdfHeight);
+      pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
       pdf.save(`CV_${HERO_DATA.name.replace(/\s+/g, '_')}.pdf`);
 
       // 4. Cleanup
