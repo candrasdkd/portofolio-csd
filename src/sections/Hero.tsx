@@ -38,12 +38,19 @@ const Hero: React.FC = () => {
       // (relative URLs are not resolved when rendering off-screen)
       let photoSrc: string | undefined;
       try {
-        const res = await fetch('/assets/me.jpg');
-        const blob = await res.blob();
-        photoSrc = await new Promise<string>((resolve) => {
-          const reader = new FileReader();
-          reader.onloadend = () => resolve(reader.result as string);
-          reader.readAsDataURL(blob);
+        photoSrc = await new Promise<string>((resolve, reject) => {
+          const img = new Image();
+          // Remove crossOrigin='anonymous' to avoid Safari CORS blockage on same-origin
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+            const ctx = canvas.getContext('2d')!;
+            ctx.drawImage(img, 0, 0);
+            resolve(canvas.toDataURL('image/jpeg', 0.8));
+          };
+          img.onerror = () => reject(new Error('Image failed to load'));
+          img.src = import.meta.env.BASE_URL + 'assets/me.jpg';
         });
       } catch {
         console.warn('Could not load profile photo for CV');
@@ -83,6 +90,11 @@ const Hero: React.FC = () => {
       await document.fonts.ready; // Explicitly ensure fonts are loaded
 
       const pixelRatio = 1.35;
+      
+      // Workaround for Safari: The first html-to-image render is often blank or misses images.
+      // Calling it twice forces Safari to complete the rendering cycle.
+      await toJpeg(element, { quality: 0.1, pixelRatio: 1 });
+      
       const imgData = await toJpeg(element, {
         quality: 0.92,
         pixelRatio,

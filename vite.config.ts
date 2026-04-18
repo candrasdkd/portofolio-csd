@@ -15,7 +15,7 @@ export default defineConfig({
       devOptions: {
         enabled: false // Explicitly disable in dev to prevent HMR interference
       },
-      includeAssets: ['favicon.svg', 'assets/profile.png'],
+      includeAssets: ['favicon.svg', 'assets/me.jpg'],
       manifest: {
         name: 'Candra SDKD | Portfolio',
         short_name: 'CSD Portfolio',

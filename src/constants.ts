@@ -65,9 +65,9 @@ export const EXPERIENCE: ExperienceItem[] = [
   },
   {
     id: 5,
-    role: "Freelance Frontend Developer",
+    role: "Freelance Website Developer",
     company: "Nihong Jastip",
-    period: "Jan 2024 - Dec 2025",
+    period: "Feb 2024 - Present",
     type: "Freelance",
     techStack: ["React", "JavaScript", "TypeScript", "Vite", "TailwindCSS", "Firebase", "Framer Motion", "Recharts", "jsPDF", "PWA", "Vercel"],
     description: [
