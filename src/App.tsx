@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import Navbar from '@/components/Navbar';
-import Hero from '@/sections/Hero';
-import About from '@/sections/About';
-import Skills from '@/sections/Skills';
-import Experience from '@/sections/Experience';
-import Projects from '@/sections/Projects';
-import Contact from '@/sections/Contact';
-import Loader from '@/components/Loader';
+import Navbar from '@/presentation/components/Navbar';
+import Hero from '@/presentation/sections/Hero';
+import About from '@/presentation/sections/About';
+import Skills from '@/presentation/sections/Skills';
+import Experience from '@/presentation/sections/Experience';
+import Projects from '@/presentation/sections/Projects';
+import Contact from '@/presentation/sections/Contact';
+import Loader from '@/presentation/components/Loader';
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);

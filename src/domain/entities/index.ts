@@ -1,27 +1,28 @@
-// types.ts
+// domain/entities/index.ts
+// Single source of truth untuk semua domain types / entities.
+// Layer lain harus import dari sini, bukan langsung dari types.ts.
+
 export enum ProjectCategory {
   PERSONAL = 'Personal',
-  CLIENT = 'Client'
+  CLIENT = 'Client',
 }
 
-// [NEW] Enum untuk tipe tampilan
 export enum ProjectType {
   WEB = 'Web',
-  MOBILE = 'Mobile'
+  MOBILE = 'Mobile',
 }
 
 export interface Project {
   id: number;
   title: string;
   category: ProjectCategory;
-  type: ProjectType; // [NEW]
+  type: ProjectType;
   description: string;
   fullDescription: string;
   technologies: string[];
   images: string[];
-  demoUrl?: string; // Untuk Web Live
+  demoUrl?: string;
   repoUrl?: string;
-  // [NEW] Mobile specific links
   playStoreUrl?: string;
   appStoreUrl?: string;
 }
@@ -35,12 +36,12 @@ export interface ExperienceItem {
   description: string | string[];
   certificate?: string;
   type: 'Full-time' | 'Freelance' | 'Contract';
-  techStack: string[]; 
+  techStack: string[];
 }
 
 export interface Skill {
   name: string;
-  icon: string; // URL or Lucide component name logic
+  icon: string;
   level: number; // 0-100
 }
 
@@ -51,4 +52,17 @@ export interface EducationItem {
   period: string;
   gpa: string;
   description?: string;
+}
+
+export interface HeroData {
+  name: string;
+  role: string;
+  tagline: string;
+  description: string;
+  birthDate: string;
+  location: string;
+  socials: {
+    github: string;
+    linkedin: string;
+  };
 }

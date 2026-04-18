@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { EXPERIENCE, EDUCATION } from '@/constants';
+import { useExperience } from '@/application/hooks/useExperience';
 import { Briefcase, Code2, ExternalLink, FileText, GraduationCap } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const Experience: React.FC = () => {
   const { t } = useTranslation();
-  const [filter, setFilter] = useState<'All' | 'Full-time' | 'Contract' | 'Freelance'>('All');
-
-  const filteredExperience = EXPERIENCE
-    .filter(item => filter === 'All' || item.type === filter)
+  const { experience, education, filter, setFilter } = useExperience();
 
   const handleViewCertificate = (pdfUrl: string) => {
     window.open(pdfUrl, '_blank');
@@ -29,7 +26,6 @@ const Experience: React.FC = () => {
             {t('experience.title')}
           </h2>
 
-          {/* Filter Buttons */}
           <div className="flex flex-wrap justify-center gap-3 mb-10">
             {['All', 'Contract', 'Freelance'].map((keyName) => (
               <button
@@ -37,8 +33,7 @@ const Experience: React.FC = () => {
                 onClick={() => setFilter(keyName as any)}
                 className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${filter === keyName
                   ? 'bg-primary border-primary text-white dark:text-dark shadow-[0_0_15px_rgba(var(--primary-rgb),0.4)]'
-                  : 'bg-transparent border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-gray-400 dark:hover:border-gray-500'
-                  }`}
+                  : 'bg-transparent border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-gray-400 dark:hover:border-gray-500'}`}
               >
                 {t(`experience.${keyName.toLowerCase()}`)}
               </button>
@@ -47,11 +42,10 @@ const Experience: React.FC = () => {
         </motion.div>
 
         <div className="relative space-y-12">
-          {/* Timeline Line */}
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gray-800 -translate-x-1/2 md:translate-x-0" />
 
           <AnimatePresence mode="popLayout">
-            {filteredExperience.map((item, index) => (
+            {experience.map((item, index) => (
               <motion.div
                 key={item.id}
                 layout
@@ -66,13 +60,11 @@ const Experience: React.FC = () => {
 
                 <div className="md:w-1/2 pl-12 md:pl-0">
                   <div className={`p-6 bg-white dark:bg-card rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-primary/50 transition-all shadow-xl group ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'}`}>
-
                     <div className="flex justify-between items-start mb-2">
                       <span className="text-primary text-sm font-mono font-semibold">{item.period}</span>
                       <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border ${item.type === 'Freelance'
                         ? 'border-orange-500/50 text-orange-500 bg-orange-500/10'
-                        : 'border-blue-500/50 text-blue-500 bg-blue-500/10'
-                        }`}>
+                        : 'border-blue-500/50 text-blue-500 bg-blue-500/10'}`}>
                         {t(`experience.${item.type.toLowerCase()}`)}
                       </span>
                     </div>
@@ -85,9 +77,7 @@ const Experience: React.FC = () => {
                         <div className="flex flex-wrap items-center gap-2 mt-2">
                           <span className="text-gray-500 dark:text-gray-600 text-[10px] uppercase font-bold italic">{t('experience.client')}</span>
                           {item.clients.map((client, idx) => (
-                            <span key={idx} className="px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase">
-                              {client}
-                            </span>
+                            <span key={idx} className="px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase">{client}</span>
                           ))}
                         </div>
                       )}
@@ -95,14 +85,10 @@ const Experience: React.FC = () => {
 
                     {Array.isArray(item.description) ? (
                       <ul className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 list-disc list-outside ml-4 space-y-1">
-                        {item.description.map((point, i) => (
-                          <li key={i}>{point}</li>
-                        ))}
+                        {item.description.map((point, i) => (<li key={i}>{point}</li>))}
                       </ul>
                     ) : (
-                      <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 italic">
-                        {item.description}
-                      </p>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 italic">{item.description}</p>
                     )}
 
                     <div className="flex flex-wrap gap-2 mb-6">
@@ -145,7 +131,7 @@ const Experience: React.FC = () => {
           </h3>
 
           <div className="grid gap-6">
-            {EDUCATION.map((edu) => (
+            {education.map((edu) => (
               <motion.div
                 key={edu.id}
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -164,9 +150,7 @@ const Experience: React.FC = () => {
                   </div>
                 </div>
                 {edu.description && (
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-4 leading-relaxed">
-                    {edu.description}
-                  </p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-4 leading-relaxed">{edu.description}</p>
                 )}
               </motion.div>
             ))}

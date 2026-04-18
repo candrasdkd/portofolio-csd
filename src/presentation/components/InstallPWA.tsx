@@ -16,11 +16,8 @@ const InstallPWA: React.FC = () => {
 
     useEffect(() => {
         const handleBeforeInstallPrompt = (e: Event) => {
-            // Prevent the mini-infobar from appearing on mobile
             e.preventDefault();
-            // Stash the event so it can be triggered later.
             setDeferredPrompt(e as BeforeInstallPromptEvent);
-            // Update UI notify the user they can install the PWA
             setIsInstallable(true);
         };
 
@@ -32,26 +29,19 @@ const InstallPWA: React.FC = () => {
     }, []);
 
     const handleInstallClick = async () => {
-        if (!deferredPrompt) {
-            return;
-        }
-        // Show the install prompt
+        if (!deferredPrompt) return;
         await deferredPrompt.prompt();
-        // Wait for the user to respond to the prompt
         const { outcome } = await deferredPrompt.userChoice;
         if (outcome === 'accepted') {
             console.log('User accepted the install prompt');
         } else {
             console.log('User dismissed the install prompt');
         }
-        // We've used the prompt, and can't use it again, throw it away
         setDeferredPrompt(null);
         setIsInstallable(false);
     };
 
-    if (!isInstallable) {
-        return null;
-    }
+    if (!isInstallable) return null;
 
     return (
         <button

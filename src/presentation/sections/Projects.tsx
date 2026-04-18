@@ -1,55 +1,17 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { PROJECTS } from '@/constants';
-import { Project, ProjectCategory, ProjectType } from '@/types';
-import ProjectModal from '@/components/ProjectModal';
-import { generateAllProjectsPDF } from '@/utils/generatePortfolioPDF';
+import { Project, ProjectCategory, ProjectType } from '@/domain/entities';
+import { useProjects } from '@/application/hooks/useProjects';
+import { useGeneratePortfolio } from '@/application/hooks/useGeneratePortfolio';
+import ProjectModal from '@/presentation/components/ProjectModal';
 import { Layers, Smartphone, Globe, Monitor, Download, Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const Projects: React.FC = () => {
   const { t } = useTranslation();
-  const [filter, setFilter] = useState<ProjectCategory | 'All'>('All');
-  const [currentPage, setCurrentPage] = useState(1);
+  const { projects, filter, currentPage, totalPages, handleFilterChange, handlePageChange } = useProjects();
+  const { isGeneratingPDF, handleDownloadPortfolioPDF } = useGeneratePortfolio();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
-  const itemsPerPage = 4;
-
-  const filteredProjects = useMemo(() => {
-    return filter === 'All'
-      ? PROJECTS
-      : PROJECTS.filter(p => p.category === filter);
-  }, [filter]);
-
-  const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
-
-  const currentProjects = useMemo(() => {
-    const start = (currentPage - 1) * itemsPerPage;
-    return filteredProjects.slice(start, start + itemsPerPage);
-  }, [filteredProjects, currentPage, itemsPerPage]);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleFilterChange = (newFilter: ProjectCategory | 'All') => {
-    setFilter(newFilter);
-    setCurrentPage(1);
-  };
-
-  const handleDownloadPDF = async () => {
-    setIsGeneratingPDF(true);
-    try {
-      // Download the currently filtered list or entire list? Better just download all.
-      await generateAllProjectsPDF(PROJECTS);
-    } catch (error) {
-      console.error('Failed to generate project PDF', error);
-      alert('Terdapat kesalahan saat membuat PDF.');
-    } finally {
-      setIsGeneratingPDF(false);
-    }
-  };
 
   return (
     <section id="projects" className="py-20 px-4 md:px-8 bg-darker">
@@ -64,9 +26,7 @@ const Projects: React.FC = () => {
             <Layers className="text-primary" />
             {t('projects.title')}
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto transition-colors">
-            {t('projects.subtitle')}
-          </p>
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto transition-colors">{t('projects.subtitle')}</p>
         </motion.div>
 
         {/* Filter Controls & Download Action */}
@@ -78,8 +38,7 @@ const Projects: React.FC = () => {
                 onClick={() => handleFilterChange(cat as ProjectCategory | 'All')}
                 className={`px-6 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${filter === cat
                   ? 'bg-primary text-white shadow-lg'
-                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-800'
-                  }`}
+                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-800'}`}
               >
                 {cat === 'All' ? t('experience.all') : cat}
               </button>
@@ -87,22 +46,18 @@ const Projects: React.FC = () => {
           </div>
 
           <button
-            onClick={handleDownloadPDF}
+            onClick={handleDownloadPortfolioPDF}
             disabled={isGeneratingPDF}
             className="flex items-center gap-2 px-6 py-2.5 bg-gray-800 dark:bg-gray-800 hover:bg-gray-700 text-white rounded-lg text-sm font-bold transition-all border border-gray-700 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg"
           >
-            {isGeneratingPDF ? (
-              <Loader2 size={16} className="animate-spin" />
-            ) : (
-              <Download size={16} />
-            )}
+            {isGeneratingPDF ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
             Download Portfolio (PDF)
           </button>
         </div>
 
         {/* Project Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          {currentProjects.map((project, index) => (
+          {projects.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 30 }}
@@ -113,49 +68,32 @@ const Projects: React.FC = () => {
               className="group bg-card rounded-2xl overflow-hidden border border-gray-800 shadow-xl cursor-pointer flex flex-col h-full"
               onClick={() => setSelectedProject(project)}
             >
-              {/* Image Container */}
-              {/* Mobile: bg-gray-950 biar kelihatan frame-nya. Web: Full image. */}
               <div className={`relative h-64 overflow-hidden ${project.type === ProjectType.MOBILE ? 'bg-gray-950' : 'bg-gray-900'}`}>
                 <img
                   src={project.images[0]}
                   alt={project.title}
-                  className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${project.type === ProjectType.MOBILE
-                    ? 'object-contain p-4'
-                    : 'object-cover object-top' // <--- Ganti jadi ini
-                    }`}
+                  className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${project.type === ProjectType.MOBILE ? 'object-contain p-4' : 'object-cover object-top'}`}
                 />
-
                 <div className="absolute inset-0 bg-gradient-to-t from-darker/90 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
 
-                {/* Badge Type (Web/Mobile) */}
                 <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-2 py-1 rounded-lg text-xs text-white border border-gray-700 flex items-center gap-1">
                   {project.type === ProjectType.MOBILE ? <Smartphone size={14} /> : <Monitor size={14} />}
                   {project.type}
                 </div>
-
                 <div className="absolute top-4 right-4 bg-primary/90 backdrop-blur-md px-3 py-1 rounded-full text-xs text-white border border-primary/50">
                   {project.category}
                 </div>
               </div>
 
-              {/* Content */}
               <div className="p-6 flex flex-col flex-grow bg-white dark:bg-card transition-colors">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2 flex-grow transition-colors">
-                  {project.description}
-                </p>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2 flex-grow transition-colors">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mt-auto">
                   {project.technologies.slice(0, 3).map((tech) => (
-                    <span key={tech} className="text-xs px-2 py-1 rounded bg-gray-800 text-gray-300 border border-gray-700">
-                      {tech}
-                    </span>
+                    <span key={tech} className="text-xs px-2 py-1 rounded bg-gray-800 text-gray-300 border border-gray-700">{tech}</span>
                   ))}
                   {project.technologies.length > 3 && (
-                    <span className="text-xs px-2 py-1 rounded bg-gray-800 text-gray-300 border border-gray-700">
-                      +{project.technologies.length - 3}
-                    </span>
+                    <span className="text-xs px-2 py-1 rounded bg-gray-800 text-gray-300 border border-gray-700">+{project.technologies.length - 3}</span>
                   )}
                 </div>
               </div>
@@ -172,8 +110,7 @@ const Projects: React.FC = () => {
                 onClick={() => handlePageChange(i + 1)}
                 className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${currentPage === i + 1
                   ? 'bg-primary text-white scale-110'
-                  : 'bg-card text-gray-400 hover:bg-gray-800 border border-gray-800'
-                  }`}
+                  : 'bg-card text-gray-400 hover:bg-gray-800 border border-gray-800'}`}
               >
                 {i + 1}
               </button>

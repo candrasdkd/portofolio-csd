@@ -7,7 +7,6 @@ const LanguageSelector: React.FC = () => {
     const { i18n } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
 
-    // We are supporting English (en) and Indonesian (id)
     const languages = [
         { code: 'en', label: 'English' },
         { code: 'id', label: 'Bahasa Indonesia' },

@@ -1,6 +1,22 @@
-import { Project, ProjectCategory, ExperienceItem, Skill, ProjectType, EducationItem } from '@/types';
+// data/portfolio.repository.ts
+// Implementasi konkret dari IPortfolioRepository.
+// Satu-satunya tempat yang tahu bahwa data berasal dari konstanta lokal.
+// Jika suatu saat data berpindah ke API, hanya file ini yang perlu diubah.
 
-export const HERO_DATA = {
+import { IPortfolioRepository } from '@/domain/repositories';
+import {
+  HeroData,
+  Project,
+  ProjectCategory,
+  ProjectType,
+  ExperienceItem,
+  Skill,
+  EducationItem,
+} from '@/domain/entities';
+
+// ─── Raw Data ────────────────────────────────────────────────────────────────
+
+const HERO_DATA: HeroData = {
   name: "Candra Sidik Dermawan",
   role: "Frontend & Mobile Developer",
   tagline: "Building digital experiences that matter.",
@@ -13,7 +29,7 @@ export const HERO_DATA = {
   },
 };
 
-export const SKILLS: Skill[] = [
+const SKILLS: Skill[] = [
   { name: "React / React Native", icon: "react", level: 90 },
   { name: "Angular", icon: "angular", level: 70 },
   { name: "Swift", icon: "swift", level: 60 },
@@ -29,7 +45,7 @@ export const SKILLS: Skill[] = [
   { name: "Git / GitHub", icon: "git", level: 85 },
 ];
 
-export const EXPERIENCE: ExperienceItem[] = [
+const EXPERIENCE: ExperienceItem[] = [
   {
     id: 1,
     role: "Frontend Developer",
@@ -96,7 +112,7 @@ export const EXPERIENCE: ExperienceItem[] = [
       "Conducted code reviews, debugging, and performance optimization.",
       "Published and managed app releases on Google Play Store and App Store.",
     ],
-    certificate: "/pdfs/paklaring_sigmatech.pdf"
+    certificate: "/pdfs/paklaring_sigmatech.pdf",
   },
   {
     id: 4,
@@ -114,18 +130,18 @@ export const EXPERIENCE: ExperienceItem[] = [
       "Built order tracking, proof of transfer upload, and fund withdrawal features.",
       "Implemented social sharing, wishlist management, and real-time CS chat.",
     ],
-    certificate: ""
+    certificate: "",
   },
 ];
 
-export const EDUCATION: EducationItem[] = [
+const EDUCATION: EducationItem[] = [
   {
     id: 1,
     school: "Universitas Gunadarma",
     major: "Teknik Industri",
     period: "May 2016 - Nov 2020",
     gpa: "3.36",
-    description: "Focused on industrial systems optimization and production management, applying engineering principles to improve efficiency and productivity."
+    description: "Focused on industrial systems optimization and production management, applying engineering principles to improve efficiency and productivity.",
   },
   {
     id: 2,
@@ -133,11 +149,11 @@ export const EDUCATION: EducationItem[] = [
     major: "Full Stack Mobile Developer",
     period: "Jul 2021 - Oct 2021",
     gpa: "",
-    description: "Intensive bootcamp focused on full-stack mobile development."
-  }
+    description: "Intensive bootcamp focused on full-stack mobile development.",
+  },
 ];
 
-export const PROJECTS: Project[] = [
+const PROJECTS: Project[] = [
   {
     id: 6,
     title: "PruHub",
@@ -168,7 +184,7 @@ export const PROJECTS: Project[] = [
     technologies: ["React Native", "Redux", "Kotlin", "Java", "Swift", "GraphQL", "Postman", "SQL Server", "MongoDB", "Google Play Store", "App Store", "Figma"],
     images: ["assets/mok1.png", "assets/mok2.png", "assets/mok3.png", "assets/mok4.png", "assets/mok5.png", "assets/mok6.png", "assets/mok7.png"],
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.kppmining.mok",
-    appStoreUrl: "https://apps.apple.com/id/app/m-ok/id6456406607"
+    appStoreUrl: "https://apps.apple.com/id/app/m-ok/id6456406607",
   },
   {
     id: 2,
@@ -180,7 +196,7 @@ export const PROJECTS: Project[] = [
     technologies: ["React Native", "Redux", "Kotlin", "Java", "Swift", "Ruby on Rails", "Google Play Store", "App Store", "Postman", "Figma"],
     images: ["assets/kc1.jpg", "assets/kc2.jpg", "assets/kc3.jpg", "assets/kc4.jpg", "assets/kc5.jpg", "assets/kc6.jpg"],
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.kejarcita",
-    appStoreUrl: "https://apps.apple.com/id/app/kejarcita/id1532648767"
+    appStoreUrl: "https://apps.apple.com/id/app/kejarcita/id1532648767",
   },
   {
     id: 3,
@@ -192,7 +208,7 @@ export const PROJECTS: Project[] = [
     technologies: ["React", "Javascript"],
     images: ["assets/jastip1.png", "assets/jastip2.png", "assets/jastip3.png"],
     demoUrl: "https://nihongjastip.com",
-    repoUrl: ""
+    repoUrl: "",
   },
   {
     id: 4,
@@ -204,7 +220,7 @@ export const PROJECTS: Project[] = [
     technologies: ["React", "TypeScript", "Vite", "TailwindCSS", "Firebase", "Framer Motion", "Recharts", "jsPDF", "PWA"],
     images: ["assets/nihongteam1.png", "assets/nihongteam2.png", "assets/nihongteam3.png", "assets/nihongteam4.png"],
     demoUrl: "https://nihongteam.vercel.app",
-    repoUrl: ""
+    repoUrl: "",
   },
   {
     id: 5,
@@ -216,6 +232,33 @@ export const PROJECTS: Project[] = [
     technologies: ["React", "TypeScript", "Vite", "TailwindCSS", "Firebase", "Recharts", "Lucide React", "xlsx", "PWA"],
     images: ["assets/es1.jpg", "assets/es2.png", "assets/es3.png", "assets/es4.png", "assets/es5.png"],
     demoUrl: "https://easysabil.vercel.app",
-    repoUrl: "https://github.com/candrasdkd/easysabil-web"
+    repoUrl: "https://github.com/candrasdkd/easysabil-web",
   },
 ];
+
+// ─── Repository Implementation ────────────────────────────────────────────────
+
+class PortfolioRepository implements IPortfolioRepository {
+  getHeroData(): HeroData {
+    return HERO_DATA;
+  }
+
+  getProjects(): Project[] {
+    return PROJECTS;
+  }
+
+  getExperience(): ExperienceItem[] {
+    return EXPERIENCE;
+  }
+
+  getEducation(): EducationItem[] {
+    return EDUCATION;
+  }
+
+  getSkills(): Skill[] {
+    return SKILLS;
+  }
+}
+
+// Singleton instance — seluruh aplikasi menggunakan satu instance yang sama.
+export const portfolioRepository = new PortfolioRepository();

@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { SKILLS } from '@/constants';
+import { portfolioRepository } from '@/data/portfolio.repository';
 import { Cpu } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+
+const skills = portfolioRepository.getSkills();
 
 const Skills: React.FC = () => {
   const { t } = useTranslation();
@@ -23,7 +25,7 @@ const Skills: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {SKILLS.map((skill, index) => (
+          {skills.map((skill, index) => (
             <motion.div
               key={skill.name}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -34,7 +36,6 @@ const Skills: React.FC = () => {
               className="bg-gray-50 dark:bg-card p-6 rounded-xl border border-gray-200 dark:border-gray-800 flex flex-col items-center justify-center gap-4 text-center transition-colors group"
             >
               <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                {/* Simple placeholder icon logic if no SVG assets provided */}
                 <span className="text-2xl font-bold text-gray-400 group-hover:text-primary transition-colors">
                   {skill.name.charAt(0)}
                 </span>
@@ -42,7 +43,6 @@ const Skills: React.FC = () => {
               <div>
                 <h3 className="text-gray-900 dark:text-white font-medium mb-2 transition-colors">{skill.name}</h3>
                 <div className="bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden w-32 mx-auto">
-
                   <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: `${skill.level}%` }}
@@ -51,7 +51,6 @@ const Skills: React.FC = () => {
                     className="h-full bg-primary"
                   />
                 </div>
-
               </div>
             </motion.div>
           ))}

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from '@/App';
 import '@/styles/index.css';
-import '@/i18n';
+import '@/infrastructure/i18n';
 
 // Automated Service Worker cleanup for development mode
 // This prevents stale PWA caches from blocking HMR and causing blank screens

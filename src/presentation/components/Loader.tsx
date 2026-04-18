@@ -11,16 +11,8 @@ const Loader: React.FC = () => {
     >
       <div className="relative">
         <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 2,
-            ease: "easeInOut",
-            times: [0, 0.5, 1],
-            repeat: Infinity,
-          }}
+          animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
+          transition={{ duration: 2, ease: "easeInOut", times: [0, 0.5, 1], repeat: Infinity }}
           className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full"
         />
         <motion.div
