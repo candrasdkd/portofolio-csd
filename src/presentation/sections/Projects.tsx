@@ -40,7 +40,7 @@ const Projects: React.FC = () => {
                   ? 'bg-primary text-white shadow-lg'
                   : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-800'}`}
               >
-                {cat === 'All' ? t('experience.all') : cat}
+                {cat === 'All' ? t('experience.all') : t(`projects.${cat.toLowerCase()}`)}
               </button>
             ))}
           </div>
@@ -51,7 +51,7 @@ const Projects: React.FC = () => {
             className="flex items-center gap-2 px-6 py-2.5 bg-gray-800 dark:bg-gray-800 hover:bg-gray-700 text-white rounded-lg text-sm font-bold transition-all border border-gray-700 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg"
           >
             {isGeneratingPDF ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
-            Download Portfolio (PDF)
+            {t('projects.downloadBtn')}
           </button>
         </div>
 
@@ -78,16 +78,16 @@ const Projects: React.FC = () => {
 
                 <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-2 py-1 rounded-lg text-xs text-white border border-gray-700 flex items-center gap-1">
                   {project.type === ProjectType.MOBILE ? <Smartphone size={14} /> : <Monitor size={14} />}
-                  {project.type}
+                  {t(`projects.${project.type.toLowerCase()}`)}
                 </div>
                 <div className="absolute top-4 right-4 bg-primary/90 backdrop-blur-md px-3 py-1 rounded-full text-xs text-white border border-primary/50">
-                  {project.category}
+                  {t(`projects.${project.category.toLowerCase()}`)}
                 </div>
               </div>
 
               <div className="p-6 flex flex-col flex-grow bg-white dark:bg-card transition-colors">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2 flex-grow transition-colors">{project.description}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2 flex-grow transition-colors">{t(project.description)}</p>
                 <div className="flex flex-wrap gap-2 mt-auto">
                   {project.technologies.slice(0, 3).map((tech) => (
                     <span key={tech} className="text-xs px-2 py-1 rounded bg-gray-800 text-gray-300 border border-gray-700">{tech}</span>

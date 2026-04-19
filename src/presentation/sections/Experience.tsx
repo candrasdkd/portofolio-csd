@@ -69,7 +69,7 @@ const Experience: React.FC = () => {
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">{item.role}</h3>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">{t(item.role)}</h3>
 
                     <div className="mb-4 mt-1">
                       <h4 className="text-gray-600 dark:text-gray-400 font-medium">{item.company}</h4>
@@ -83,12 +83,12 @@ const Experience: React.FC = () => {
                       )}
                     </div>
 
-                    {Array.isArray(item.description) ? (
+                    {Array.isArray(t(item.description as string, { returnObjects: true })) ? (
                       <ul className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 list-disc list-outside ml-4 space-y-1">
-                        {item.description.map((point, i) => (<li key={i}>{point}</li>))}
+                        {(t(item.description as string, { returnObjects: true }) as string[]).map((point, i) => (<li key={i}>{point}</li>))}
                       </ul>
                     ) : (
-                      <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 italic">{item.description}</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 italic">{t(item.description as string)}</p>
                     )}
 
                     <div className="flex flex-wrap gap-2 mb-6">
@@ -142,7 +142,7 @@ const Experience: React.FC = () => {
                 <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
                   <div>
                     <h4 className="text-xl font-bold text-gray-900 dark:text-white">{edu.school}</h4>
-                    <p className="text-primary font-medium">{edu.major}</p>
+                    <p className="text-primary font-medium">{t(edu.major)}</p>
                   </div>
                   <div className="flex flex-col md:items-end">
                     <span className="text-sm font-mono text-gray-500">{edu.period}</span>
@@ -150,7 +150,7 @@ const Experience: React.FC = () => {
                   </div>
                 </div>
                 {edu.description && (
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-4 leading-relaxed">{edu.description}</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-4 leading-relaxed">{t(edu.description)}</p>
                 )}
               </motion.div>
             ))}

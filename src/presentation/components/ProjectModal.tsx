@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, Github, ExternalLink } from 'lucide-react';
 import { Project, ProjectType } from '@/domain/entities';
+import { useTranslation } from 'react-i18next';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -10,6 +11,7 @@ interface ProjectModalProps {
 }
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose }) => {
+  const { t } = useTranslation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isImgLoading, setIsImgLoading] = useState(true);
 
@@ -116,14 +118,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
               <div className="mb-6">
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{project.title}</h3>
                 <div className="flex flex-wrap items-center gap-2 mb-4">
-                  <span className="px-3 py-1 text-xs rounded-full bg-primary/20 text-primary border border-primary/50">{project.category}</span>
-                  <span className="px-3 py-1 text-xs rounded-full bg-gray-800 text-gray-300 border border-gray-700">{project.type}</span>
+                  <span className="px-3 py-1 text-xs rounded-full bg-primary/20 text-primary border border-primary/50">{t(`projects.${project.category.toLowerCase()}`)}</span>
+                  <span className="px-3 py-1 text-xs rounded-full bg-gray-800 text-gray-300 border border-gray-700">{t(`projects.${project.type.toLowerCase()}`)}</span>
                 </div>
-                <p className="text-gray-400 leading-relaxed text-sm md:text-base">{project.fullDescription}</p>
+                <p className="text-gray-400 leading-relaxed text-sm md:text-base">{t(project.fullDescription)}</p>
               </div>
 
               <div className="mb-8">
-                <h4 className="text-sm font-semibold text-gray-200 mb-3 uppercase tracking-wider">Technologies</h4>
+                <h4 className="text-sm font-semibold text-gray-200 mb-3 uppercase tracking-wider">{t('projects.technologies')}</h4>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
                     <span key={tech} className="px-3 py-1 bg-gray-800/50 text-gray-300 text-sm rounded-md border border-gray-700/50">{tech}</span>
@@ -132,12 +134,12 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
               </div>
 
               <div className="mt-auto pt-6 border-t border-gray-800">
-                <h4 className="text-sm font-semibold text-gray-200 mb-3 uppercase tracking-wider">Available On</h4>
+                <h4 className="text-sm font-semibold text-gray-200 mb-3 uppercase tracking-wider">{t('projects.availableOn')}</h4>
                 <div className="grid grid-cols-1 gap-3">
                   {project.demoUrl && (
                     <a href={project.demoUrl} target="_blank" rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 px-4 py-3 bg-primary hover:bg-primary/90 text-white rounded-xl transition-all font-medium shadow-lg shadow-primary/20">
-                      <ExternalLink size={18} />Live Website
+                      <ExternalLink size={18} />{t('projects.liveDemo')}
                     </a>
                   )}
                   <div className="flex gap-3">
@@ -159,7 +161,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                   {project.repoUrl && (
                     <a href={project.repoUrl} target="_blank" rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 px-4 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-xl transition-all border border-gray-700">
-                      <Github size={18} />View Source Code
+                      <Github size={18} />{t('projects.viewSource')}
                     </a>
                   )}
                 </div>

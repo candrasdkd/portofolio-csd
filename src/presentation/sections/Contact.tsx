@@ -121,7 +121,7 @@ const Contact: React.FC = () => {
         </div>
 
         <div className="mt-20 border-t border-white/5 pt-8 text-center text-gray-500 text-sm">
-          <p>&copy; {new Date().getFullYear()} CsDev. Built with React & Tailwind.</p>
+          <p>&copy; {new Date().getFullYear()} CsDev. {t('footer.rights')} {t('footer.builtWith')}</p>
         </div>
       </div>
     </section>

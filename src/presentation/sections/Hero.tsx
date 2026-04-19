@@ -29,10 +29,10 @@ const Hero: React.FC = () => {
             {t('hero.greeting')} {heroData.name}
           </span>
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight transition-colors">
-            {heroData.role}
+            {t(heroData.role)}
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed transition-colors">
-            {heroData.tagline}
+            {t(heroData.tagline)}
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">

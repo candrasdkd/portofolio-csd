@@ -36,7 +36,7 @@ const About: React.FC = () => {
               <span>{t('about.title')}</span>
             </div>
             <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">{t('about.heading')}</h2>
-            <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">{heroData.description}</p>
+            <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">{t('about.description')}</p>
             <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-8">{t('about.p1')}</p>
 
             <div className="grid grid-cols-2 gap-4">
