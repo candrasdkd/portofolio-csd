@@ -31,6 +31,7 @@ const HERO_DATA: HeroData = {
 
 const SKILLS: Skill[] = [
   { name: "React / React Native", icon: "react", level: 90 },
+  { name: "Next.js", icon: "next", level: 80 },
   { name: "Angular", icon: "angular", level: 70 },
   { name: "Swift", icon: "swift", level: 60 },
   { name: "Kotlin/Java", icon: "kt/java", level: 60 },
@@ -38,8 +39,8 @@ const SKILLS: Skill[] = [
   { name: "Javascript", icon: "js", level: 90 },
   { name: "GraphQL", icon: "graphql", level: 65 },
   { name: "Firebase", icon: "firebase", level: 70 },
-  { name: "SQL Server", icon: "sql", level: 50 },
-  { name: "Mongo DB", icon: "mongo", level: 50 },
+  { name: "SQL Server", icon: "sql", level: 60 },
+  { name: "Mongo DB", icon: "mongo", level: 60 },
   { name: "Tailwind CSS", icon: "tailwind", level: 60 },
   { name: "Figma", icon: "figma", level: 60 },
   { name: "Git / GitHub", icon: "git", level: 85 },
