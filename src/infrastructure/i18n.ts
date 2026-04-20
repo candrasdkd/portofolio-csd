@@ -63,13 +63,13 @@ const resources = {
                         "Coordinated with the design team using Figma for UI/UX implementation."
                     ],
                     jastip_web: [
-                        "Designed a modern, fully responsive company profile website using React.",
-                        "Implemented WhatsApp-integrated call-to-action for a seamless ordering flow.",
-                        "Built Nihong Team's internal admin dashboard as a PWA using TypeScript.",
-                        "Developed order, product, and admin modules with role-based access control.",
-                        "Integrated Firebase as backend for authentication and real-time data sync.",
-                        "Built financial analytics with Recharts and PDF report export using jsPDF.",
-                        "Implemented UI animations with Framer Motion and deployed on Vercel."
+                        "Designed and developed a premium, SEO-optimized company profile website using Next.js 15+.",
+                        "Integrated an intelligent AI Chatbot powered by Groq SDK for 24/7 customer support.",
+                        "Implemented advanced URL-based i18n (ID, EN, JA) and optimized SEO with JSON-LD structured data.",
+                        "Built a comprehensive internal admin dashboard as a PWA for managing products, orders, and users.",
+                        "Integrated Firebase for real-time data synchronization and role-based authentication.",
+                        "Developed financial analytics with Recharts and PDF report generation using jsPDF.",
+                        "Crafted responsive UI using TailwindCSS and Framer Motion, and managed end-to-end deployment on Vercel and custom domain hosting (Rumahweb)."
                     ],
                     kpp: [
                         "Developed and maintained M-OK's internal mobile office app using React Native.",
@@ -148,7 +148,7 @@ const resources = {
                     }
                 }
             },
-            contact: { title: "Contact", heading1: "Let's discuss your", heading2: "next big project.", subtitle: "Interested in working together? Fill out the form or reach out via email. I'm always open to discussing new projects, creative ideas, or opportunities.", email: "Email Me", location: "Location", socials: "Connect on Socials", formName: "Name", formEmail: "Email", formMessage: "Message", sendMsg: "Send Message", sending: "Sending...", success: "Message sent successfully!", error: "Failed to send. Please try again." },
+            contact: { title: "Contact", heading1: "Let's discuss your", heading2: "next big project.", subtitle: "Interested in working together? Fill out the form or reach out via email. I'm always open to discussing new projects, creative ideas, or opportunities.", email: "Email Me", phone: "Phone Number", location: "Location", socials: "Connect on Socials", formName: "Name", formEmail: "Email", formMessage: "Message", sendMsg: "Send Message", sending: "Sending...", success: "Message sent successfully!", error: "Failed to send. Please try again." },
             footer: { rights: "All rights reserved.", builtWith: "Built with React & Vanilla CSS." }
         }
     },
@@ -208,13 +208,13 @@ const resources = {
                         "Berkoordinasi dengan tim desain menggunakan Figma untuk implementasi UI/UX."
                     ],
                     jastip_web: [
-                        "Mendesain website profil perusahaan yang modern dan responsif menggunakan React.",
-                        "Mengimplementasikan call-to-action terintegrasi WhatsApp untuk alur pemesanan yang mulus.",
-                        "Membangun dashboard admin internal Nihong Team sebagai PWA menggunakan TypeScript.",
-                        "Mengembangkan modul pesanan, produk, dan admin dengan kontrol akses berbasis peran.",
-                        "Integrasi Firebase sebagai backend untuk autentikasi dan sinkronisasi data real-time.",
-                        "Membangun analitik keuangan dengan Recharts dan ekspor laporan PDF menggunakan jsPDF.",
-                        "Mengimplementasikan animasi UI dengan Framer Motion dan deploy di Vercel."
+                        "Mendesain dan mengembangkan website profil perusahaan premium yang dioptimalkan untuk SEO menggunakan Next.js 15+.",
+                        "Mengintegrasikan Chatbot AI cerdas yang didukung oleh Groq SDK untuk dukungan pelanggan 24/7.",
+                        "Mengimplementasikan i18n berbasis URL tingkat lanjut (ID, EN, JA) dan optimasi SEO dengan data terstruktur JSON-LD.",
+                        "Membangun dashboard admin internal komprehensif sebagai PWA untuk mengelola produk, pesanan, dan pengguna.",
+                        "Integrasi Firebase untuk sinkronisasi data real-time dan autentikasi berbasis peran.",
+                        "Mengembangkan analitik keuangan dengan Recharts dan implementasi pembuatan laporan PDF menggunakan jsPDF.",
+                        "Merancang UI responsif menggunakan TailwindCSS dan Framer Motion, serta mengelola deployment end-to-end di Vercel dan hosting domain kustom (Rumahweb)."
                     ],
                     kpp: [
                         "Mengembangkan dan memelihara aplikasi kantor seluler internal M-OK menggunakan React Native.",
@@ -293,7 +293,7 @@ const resources = {
                     }
                 }
             },
-            contact: { title: "Kontak", heading1: "Mari diskusikan", heading2: "proyek besar Anda selanjutnya.", subtitle: "Tertarik untuk bekerja sama? Isi formulir atau hubungi via email. Saya selalu terbuka untuk mendiskusikan proyek baru, ide kreatif, atau peluang lainnya.", email: "Email Saya", location: "Lokasi", socials: "Terhubung di Sosial", formName: "Nama", formEmail: "Email", formMessage: "Pesan", sendMsg: "Kirim Pesan", sending: "Mengirim...", success: "Pesan berhasil dikirim!", error: "Gagal mengirim. Silakan coba lagi." },
+            contact: { title: "Kontak", heading1: "Mari diskusikan", heading2: "proyek besar Anda selanjutnya.", subtitle: "Tertarik untuk bekerja sama? Isi formulir atau hubungi via email. Saya selalu terbuka untuk mendiskusikan proyek baru, ide kreatif, atau peluang lainnya.", email: "Email Saya", phone: "Nomor Telepon", location: "Lokasi", socials: "Terhubung di Sosial", formName: "Nama", formEmail: "Email", formMessage: "Pesan", sendMsg: "Kirim Pesan", sending: "Mengirim...", success: "Pesan berhasil dikirim!", error: "Gagal mengirim. Silakan coba lagi." },
             footer: { rights: "Hak cipta dilindungi.", builtWith: "Dibuat dengan React & Vanilla CSS." }
         }
     }

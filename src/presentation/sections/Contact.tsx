@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Send, Loader2, CheckCircle, XCircle, MapPin, Linkedin, Github, ArrowRight } from 'lucide-react';
+import { Mail, Send, Loader2, CheckCircle, XCircle, MapPin, Linkedin, Github, ArrowRight, Phone } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { useTranslation } from 'react-i18next';
 
@@ -54,6 +54,13 @@ const Contact: React.FC = () => {
                 <div>
                   <h4 className="text-gray-900 dark:text-white font-medium transition-colors">{t('contact.email')}</h4>
                   <p className="text-gray-600 dark:text-gray-400 text-sm transition-colors">projectcsd07@gmail.com</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-white/50 dark:bg-white/5 rounded-lg border border-gray-200 dark:border-white/10 text-green-500 transition-colors"><Phone size={24} /></div>
+                <div>
+                  <h4 className="text-gray-900 dark:text-white font-medium transition-colors">{t('contact.phone')}</h4>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm transition-colors">085156775933</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">

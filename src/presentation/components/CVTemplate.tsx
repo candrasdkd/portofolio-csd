@@ -1,5 +1,6 @@
 import React from 'react';
 import { portfolioRepository } from '@/data/portfolio.repository';
+import i18n from '@/infrastructure/i18n';
 
 interface CVTemplateProps {
     photoSrc?: string;
@@ -98,7 +99,7 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ photoSrc }) => {
                             fontSize: '8px', color: '#64748b', marginTop: '3px',
                             letterSpacing: '0.09em', textTransform: 'uppercase',
                         }}>
-                            {heroData.role}
+                            {i18n.t(heroData.role)}
                         </div>
                     </div>
                 </div>
@@ -129,6 +130,7 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ photoSrc }) => {
                     <SideHeading>Contact</SideHeading>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '7px', fontSize: '9.5px' }}>
                         {[
+                            { label: 'Phone', value: '085156775933', href: 'tel:085156775933' },
                             { label: 'Website', value: 'https://csddev.vercel.app', href: 'https://csddev.vercel.app' },
                             { label: 'LinkedIn', value: 'linkedin.com/in/candrasdk', href: heroData.socials.linkedin },
                             { label: 'GitHub', value: 'github.com/candrasdkd', href: heroData.socials.github },
@@ -192,7 +194,7 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ photoSrc }) => {
                     {education.map(edu => (
                         <div key={edu.id}>
                             <div style={{ fontSize: '10.5px', fontWeight: 700, color: '#ffffff' }}>{edu.school}</div>
-                            <div style={{ fontSize: '9.5px', color: '#93c5fd', marginTop: '1px' }}>{edu.major}</div>
+                            <div style={{ fontSize: '9.5px', color: '#93c5fd', marginTop: '1px' }}>{i18n.t(edu.major)}</div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '3px' }}>
                                 <span style={{ fontSize: '9px', color: '#475569' }}>{edu.period}</span>
                                 {edu.gpa && (
@@ -220,7 +222,7 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ photoSrc }) => {
                         {heroData.name}
                     </h1>
                     <div style={{ fontSize: '12.5px', fontWeight: 600, color: '#3b82f6', marginTop: '4px' }}>
-                        {heroData.role}
+                        {i18n.t(heroData.role)}
                     </div>
                     <div style={{ height: '2px', background: 'linear-gradient(to right, #3b82f6, transparent)', marginTop: '8px', borderRadius: '1px' }} />
                 </div>
@@ -253,7 +255,7 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ photoSrc }) => {
                 <div>
                     <MainHeading>Professional Profile</MainHeading>
                     <p style={{ fontSize: '11px', color: '#475569', lineHeight: 1.7, margin: 0, textAlign: 'justify' }}>
-                        {heroData.description} Specializing in the React ecosystem for web and React Native for mobile, I deliver modern UI/UX-driven solutions with clean, maintainable architectures — from responsive landing pages and PWAs to cross-platform mobile apps published on the App Store and Google Play.
+                        {i18n.t(heroData.description)} Specializing in the React ecosystem for web and React Native for mobile, I deliver modern UI/UX-driven solutions with clean, maintainable architectures — from responsive landing pages and PWAs to cross-platform mobile apps published on the App Store and Google Play.
                     </p>
                 </div>
 
@@ -261,14 +263,18 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ photoSrc }) => {
                 <div style={{ flex: 1 }}>
                     <MainHeading>Work Experience</MainHeading>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                        {experience.map(exp => (
+                        {experience.map(exp => {
+                            const translatedDesc = i18n.t(exp.description, { returnObjects: true });
+                            const descArray = Array.isArray(translatedDesc) ? translatedDesc as string[] : [translatedDesc as unknown as string];
+
+                            return (
                             <div key={exp.id} style={{
                                 paddingLeft: '9px',
                                 borderLeft: `2px solid ${exp.type === 'Freelance' ? '#f97316' : '#3b82f6'}`,
                             }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'nowrap', gap: '6px' }}>
                                     <div style={{ display: 'flex', alignItems: 'baseline', gap: '5px', flexWrap: 'wrap', flex: 1 }}>
-                                        <span style={{ fontSize: '12px', fontWeight: 700, color: '#0f172a', whiteSpace: 'nowrap' }}>{exp.role}</span>
+                                        <span style={{ fontSize: '12px', fontWeight: 700, color: '#0f172a', whiteSpace: 'nowrap' }}>{i18n.t(exp.role)}</span>
                                         <span style={{ fontSize: '10.5px', color: '#3b82f6', fontWeight: 600, whiteSpace: 'nowrap' }}>@ {exp.company}</span>
                                         <span style={{
                                             fontSize: '9px', fontWeight: 700,
@@ -286,9 +292,9 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ photoSrc }) => {
                                     </span>
                                 </div>
 
-                                {Array.isArray(exp.description) ? (
+                                {Array.isArray(translatedDesc) ? (
                                     <div style={{ margin: '3px 0 4px' }}>
-                                        {exp.description.slice(0, 4).map((point, i, arr) => (
+                                        {descArray.slice(0, 4).map((point, i, arr) => (
                                             <div key={i} style={{
                                                 display: 'flex',
                                                 gap: '4px',
@@ -302,7 +308,7 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ photoSrc }) => {
                                     </div>
                                 ) : (
                                     <p style={{ fontSize: '9.5px', color: '#64748b', lineHeight: 1.5, margin: '3px 0 4px', textAlign: 'justify' }}>
-                                        {exp.description}
+                                        {translatedDesc as unknown as string}
                                     </p>
                                 )}
 
@@ -320,7 +326,7 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ photoSrc }) => {
                                     ))}
                                 </div>
                             </div>
-                        ))}
+                        )})}
                     </div>
                 </div>
             </div>
