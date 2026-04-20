@@ -1,10 +1,12 @@
+"use client";
+
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Project, ProjectCategory, ProjectType } from '@/domain/entities';
 import { useProjects } from '@/application/hooks/useProjects';
 import { useGeneratePortfolio } from '@/application/hooks/useGeneratePortfolio';
 import ProjectModal from '@/presentation/components/ProjectModal';
-import { Layers, Smartphone, Globe, Monitor, Download, Loader2 } from 'lucide-react';
+import { Layers, Smartphone, Globe, Monitor, Download, Loader2, ArrowRight, ExternalLink } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const Projects: React.FC = () => {
@@ -13,93 +15,159 @@ const Projects: React.FC = () => {
   const { isGeneratingPDF, handleDownloadPortfolioPDF } = useGeneratePortfolio();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
+  const CATEGORIES = ['All', ProjectCategory.PERSONAL, ProjectCategory.CLIENT];
+
   return (
-    <section id="projects" className="py-20 px-4 md:px-8 bg-darker">
-      <div className="max-w-7xl mx-auto">
+    <section id="projects" className="py-32 px-4 md:px-8 relative overflow-hidden" style={{ background: '#030d1f' }}>
+      {/* Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-grid opacity-20" />
+        <div className="orb orb-primary w-[500px] h-[500px] bottom-0 right-0 opacity-30" />
+        <div className="orb orb-secondary w-[400px] h-[400px] top-0 left-0 opacity-25" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3 transition-colors">
-            <Layers className="text-primary" />
+          <span className="section-badge mb-6 inline-flex">
+            <Layers size={13} />
             {t('projects.title')}
+          </span>
+          <h2 className="section-heading text-white mt-4 mb-4">
+            <span className="text-gradient">{t('projects.title')}</span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto transition-colors">{t('projects.subtitle')}</p>
+          <div className="gradient-divider w-32 mx-auto mb-4" />
+          <p className="text-slate-400 text-base max-w-xl mx-auto">{t('projects.subtitle')}</p>
         </motion.div>
 
-        {/* Filter Controls & Download Action */}
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
-          <div className="bg-gray-100 dark:bg-card p-1 rounded-xl flex gap-1 border border-gray-200 dark:border-gray-800 transition-colors">
-            {['All', ProjectCategory.PERSONAL, ProjectCategory.CLIENT].map((cat) => (
+        {/* Controls row */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-14">
+          {/* Category filter */}
+          <div className="glass-effect p-1.5 rounded-2xl flex gap-1 border border-white/5">
+            {CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 onClick={() => handleFilterChange(cat as ProjectCategory | 'All')}
-                className={`px-6 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${filter === cat
-                  ? 'bg-primary text-white shadow-lg'
-                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-800'}`}
+                className={`px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 select-none ${
+                  filter === cat
+                    ? 'bg-primary text-white shadow-[0_4px_12px_rgba(139,92,246,0.35)] scale-[1.03]'
+                    : 'text-slate-400 hover:text-white hover:bg-white/5'
+                }`}
               >
                 {cat === 'All' ? t('experience.all') : t(`projects.${cat.toLowerCase()}`)}
               </button>
             ))}
           </div>
 
+          {/* Download portfolio */}
           <button
             onClick={handleDownloadPortfolioPDF}
             disabled={isGeneratingPDF}
-            className="flex items-center gap-2 px-6 py-2.5 bg-gray-800 dark:bg-gray-800 hover:bg-gray-700 text-white rounded-lg text-sm font-bold transition-all border border-gray-700 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg"
+            className="flex items-center gap-2 px-6 py-2.5 glass-effect border border-white/10 hover:border-primary/40 rounded-2xl text-sm font-bold text-slate-300 hover:text-white transition-all disabled:opacity-60 disabled:cursor-not-allowed hover:-translate-y-0.5"
           >
-            {isGeneratingPDF ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
-            {t('projects.downloadBtn')}
+            {isGeneratingPDF
+              ? <><Loader2 size={16} className="animate-spin" />{t('projects.downloadBtn')}</>
+              : <><Download size={16} />{t('projects.downloadBtn')}</>
+            }
           </button>
         </div>
 
         {/* Project Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              whileHover={{ y: -5 }}
-              className="group bg-card rounded-2xl overflow-hidden border border-gray-800 shadow-xl cursor-pointer flex flex-col h-full"
-              onClick={() => setSelectedProject(project)}
-            >
-              <div className={`relative h-64 overflow-hidden ${project.type === ProjectType.MOBILE ? 'bg-gray-950' : 'bg-gray-900'}`}>
-                <img
-                  src={project.images[0]}
-                  alt={project.title}
-                  className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${project.type === ProjectType.MOBILE ? 'object-contain p-4' : 'object-cover object-top'}`}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-darker/90 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+        <AnimatePresence mode="popLayout">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-7 mb-14">
+            {projects.map((project, index) => (
+              <motion.article
+                key={project.id}
+                layout
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.05 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                onClick={() => setSelectedProject(project)}
+                className="group card-premium rounded-3xl overflow-hidden cursor-pointer flex flex-col h-full"
+              >
+                {/* Image area */}
+                <div className={`relative overflow-hidden ${
+                  project.type === ProjectType.MOBILE ? 'h-64 bg-slate-950' : 'h-60 bg-slate-950'
+                }`}>
+                  <img
+                    src={project.images[0]}
+                    alt={project.title}
+                    className={`w-full h-full transition-transform duration-700 group-hover:scale-110 ${
+                      project.type === ProjectType.MOBILE
+                        ? 'object-contain p-6'
+                        : 'object-cover object-top'
+                    }`}
+                  />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-70 group-hover:opacity-40 transition-opacity duration-500" />
 
-                <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-2 py-1 rounded-lg text-xs text-white border border-gray-700 flex items-center gap-1">
-                  {project.type === ProjectType.MOBILE ? <Smartphone size={14} /> : <Monitor size={14} />}
-                  {t(`projects.${project.type.toLowerCase()}`)}
-                </div>
-                <div className="absolute top-4 right-4 bg-primary/90 backdrop-blur-md px-3 py-1 rounded-full text-xs text-white border border-primary/50">
-                  {t(`projects.${project.category.toLowerCase()}`)}
-                </div>
-              </div>
+                  {/* Tags */}
+                  <div className="absolute top-4 left-4 flex items-center gap-2">
+                    <span className="flex items-center gap-1.5 bg-black/50 backdrop-blur-xl px-3 py-1.5 rounded-xl text-[10px] font-bold text-white border border-white/10">
+                      {project.type === ProjectType.MOBILE
+                        ? <Smartphone size={12} />
+                        : <Monitor size={12} />
+                      }
+                      {t(`projects.${project.type.toLowerCase()}`)}
+                    </span>
+                  </div>
 
-              <div className="p-6 flex flex-col flex-grow bg-white dark:bg-card transition-colors">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2 flex-grow transition-colors">{t(project.description)}</p>
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {project.technologies.slice(0, 3).map((tech) => (
-                    <span key={tech} className="text-xs px-2 py-1 rounded bg-gray-800 text-gray-300 border border-gray-700">{tech}</span>
-                  ))}
-                  {project.technologies.length > 3 && (
-                    <span className="text-xs px-2 py-1 rounded bg-gray-800 text-gray-300 border border-gray-700">+{project.technologies.length - 3}</span>
-                  )}
+                  <div className="absolute top-4 right-4">
+                    <span className="bg-primary/25 backdrop-blur-xl px-3 py-1.5 rounded-xl text-[10px] font-bold text-primary-light border border-primary/30">
+                      {t(`projects.${project.category.toLowerCase()}`)}
+                    </span>
+                  </div>
+
+                  {/* Hover cta */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="flex items-center gap-2 btn-primary px-5 py-2.5 rounded-2xl text-sm font-bold">
+                      <ExternalLink size={15} />
+                      {t('projects.liveDemo') || 'View Details'}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+
+                {/* Content */}
+                <div className="p-7 flex flex-col flex-grow">
+                  <h3 className="text-xl font-bold text-white mb-2.5 group-hover:text-primary-light transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-slate-400 text-sm mb-5 line-clamp-2 flex-grow leading-relaxed">
+                    {t(project.description)}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5 mt-auto">
+                    {project.technologies.slice(0, 4).map((tech) => (
+                      <span key={tech} className="tech-badge">{tech}</span>
+                    ))}
+                    {project.technologies.length > 4 && (
+                      <span className="tech-badge">+{project.technologies.length - 4}</span>
+                    )}
+                  </div>
+
+                  {/* Bottom action */}
+                  <div className="flex items-center gap-1.5 mt-5 pt-5 border-t border-white/5">
+                    <span className="text-xs font-bold text-slate-500 group-hover:text-primary-light transition-colors">
+                      View Details
+                    </span>
+                    <ArrowRight
+                      size={13}
+                      className="text-slate-600 group-hover:text-primary-light group-hover:translate-x-1 transition-all"
+                    />
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </AnimatePresence>
 
         {/* Pagination */}
         {totalPages > 1 && (
@@ -108,9 +176,11 @@ const Projects: React.FC = () => {
               <button
                 key={i}
                 onClick={() => handlePageChange(i + 1)}
-                className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${currentPage === i + 1
-                  ? 'bg-primary text-white scale-110'
-                  : 'bg-card text-gray-400 hover:bg-gray-800 border border-gray-800'}`}
+                className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all select-none ${
+                  currentPage === i + 1
+                    ? 'bg-primary text-white shadow-[0_4px_14px_rgba(139,92,246,0.4)] scale-110'
+                    : 'glass-effect text-slate-400 hover:text-white border border-white/5 hover:border-white/15'
+                }`}
               >
                 {i + 1}
               </button>

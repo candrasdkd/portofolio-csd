@@ -41,7 +41,7 @@ export const generateCVUseCase = async (heroData: HeroData): Promise<void> => {
         resolve(canvas.toDataURL('image/jpeg', 0.8));
       };
       img.onerror = () => reject(new Error('Image failed to load'));
-      img.src = import.meta.env.BASE_URL + 'assets/me.jpg';
+      img.src = '/assets/me.jpg';
     });
   } catch {
     console.warn('Could not load profile photo for CV');

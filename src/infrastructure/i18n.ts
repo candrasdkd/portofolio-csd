@@ -1,3 +1,5 @@
+"use client";
+
 // infrastructure/i18n.ts
 // Framework config untuk internationalization.
 // Dipindah dari src/i18n.ts — konten tidak berubah.

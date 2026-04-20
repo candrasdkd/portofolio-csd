@@ -1,4 +1,7 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
+import "@/infrastructure/i18n";
 import { AnimatePresence } from 'framer-motion';
 import Navbar from '@/presentation/components/Navbar';
 import Hero from '@/presentation/sections/Hero';
@@ -9,11 +12,10 @@ import Projects from '@/presentation/sections/Projects';
 import Contact from '@/presentation/sections/Contact';
 import Loader from '@/presentation/components/Loader';
 
-const App: React.FC = () => {
+export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate asset loading time
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1000);
@@ -22,25 +24,28 @@ const App: React.FC = () => {
 
   return (
     <>
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {loading && <Loader key="loader" />}
       </AnimatePresence>
 
       {!loading && (
-        <div className="bg-dark min-h-screen text-slate-200 selection:bg-primary/30">
+        <div className="bg-darker min-h-screen text-slate-200 selection:bg-primary/30 selection:text-white">
           <Navbar />
           <main>
             <Hero />
+            <div className="gradient-divider opacity-40" />
             <About />
+            <div className="gradient-divider opacity-40" />
             <Skills />
+            <div className="gradient-divider opacity-40" />
             <Experience />
+            <div className="gradient-divider opacity-40" />
             <Projects />
+            <div className="gradient-divider opacity-40" />
             <Contact />
           </main>
         </div>
       )}
     </>
   );
-};
-
-export default App;
+}

@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import { portfolioRepository } from '@/data/portfolio.repository';
 import i18n from '@/infrastructure/i18n';
