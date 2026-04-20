@@ -135,8 +135,8 @@ const resources = {
                         full: "Reputed as a premier online education platform for students, teachers, and schools, Kejarcita serves dual purposes: promoting independent practice and assisting synchronous online learning. Key highlights include an expansive, repeatedly updated question bank accommodating elementary to high school criteria. The platform provides free access to thousands of educational exercises in Mathematics, Sciences, Social Studies, Indonesian, and English. Additionally, complex High-Order Thinking Skills (HOTS) questions are fully accommodated in premium subscriptions."
                     },
                     jastip: {
-                        desc: "A responsive landing page designed for a Japan-Indonesia international personal shopping and shipping service, assisting users in understanding operations and effortlessly initiating orders.",
-                        full: "The Nihong Jastip website acts primarily as an informational hub and a strong branding medium for the personal shopping (jastip) enterprise. Key development focused on crafting a modern, fully responsive, and straightforward interface so prospective users quickly understand service particulars and seamlessly submit orders. The website encompasses detailed service explanations, core business advantages, and strategically positioned call-to-actions directly connected to WhatsApp for rapid inquiries."
+                        desc: "A premium, SEO-optimized company profile website for a Japan-Indonesia personal shopping service, featuring an intelligent AI chatbot and advanced i18n support.",
+                        full: "The Nihong Jastip website is a high-performance, Next.js 15+ web application that serves as the digital storefront for a Japan-Indonesia personal shopping and expedition enterprise. It features an intelligent AI chatbot powered by Groq to provide 24/7 customer support, advanced URL-based internationalization (ID, EN, JA), and robust SEO optimizations with JSON-LD structured data. The platform boasts a premium, fully responsive design with smooth Framer Motion animations to ensure a seamless and engaging user experience."
                     },
                     jastip_admin: {
                         desc: "A feature-rich admin dashboard for NihongTeam's Jastip service, enabling admins to manage products, orders, and users through an intuitive and responsive interface.",
@@ -280,8 +280,8 @@ const resources = {
                         full: "Reputasi sebagai platform pendidikan online utama untuk siswa dan guru, Kejarcita membantu latihan mandiri dan pembelajaran sinkron. Memiliki bank soal luas dari SD hingga SMA, termasuk soal HOTS untuk pelanggan premium."
                     },
                     jastip: {
-                        desc: "Landing page responsif untuk layanan jasa titip beli (jastip) Jepang-Indonesia.",
-                        full: "Website Nihong Jastip bertindak sebagai pusat informasi dan media branding untuk usaha jastip. Pengembangan fokus pada antarmuka modern dan responsif agar calon pengguna cepat memahami layanan dan melakukan pemesanan via WhatsApp."
+                        desc: "Website profil perusahaan premium yang dioptimalkan untuk SEO untuk layanan jastip Jepang-Indonesia, dilengkapi dengan chatbot AI cerdas dan dukungan i18n lanjutan.",
+                        full: "Website Nihong Jastip adalah aplikasi web Next.js 15+ berkinerja tinggi yang berfungsi sebagai etalase digital untuk perusahaan jasa titip dan ekspedisi Jepang-Indonesia. Platform ini dilengkapi dengan chatbot AI cerdas yang didukung oleh Groq untuk menyediakan dukungan pelanggan 24/7, internasionalisasi berbasis URL tingkat lanjut (ID, EN, JA), dan optimisasi SEO yang kuat dengan structured data JSON-LD. Website ini menawarkan desain premium yang sepenuhnya responsif dengan animasi Framer Motion yang halus untuk memastikan pengalaman pengguna yang mulus dan menarik."
                     },
                     jastip_admin: {
                         desc: "Dashboard admin kaya fitur untuk layanan Jastip NihongTeam, mengelola produk, pesanan, dan pengguna.",

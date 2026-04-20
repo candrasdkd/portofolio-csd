@@ -166,10 +166,10 @@ const PROJECTS: Project[] = [
     type: ProjectType.WEB,
     description: "projects.items.jastip.desc",
     fullDescription: "projects.items.jastip.full",
-    technologies: ["React", "Javascript"],
-    images: ["assets/jastip1.png", "assets/jastip2.png", "assets/jastip3.png"],
+    technologies: ["Next.js", "TypeScript", "Groq AI", "Framer Motion"],
+    images: ["assets/jastip1.png", "assets/jastip2.png", "assets/jastip3.png", "assets/jastip4.png"],
     demoUrl: "https://nihongjastip.com",
-    repoUrl: "",
+    repoUrl: "https://github.com/candrasdkd/nihong-jastip-company-profile",
   },
   {
     id: 4,
