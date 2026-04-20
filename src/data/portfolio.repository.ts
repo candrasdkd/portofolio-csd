@@ -71,7 +71,7 @@ const EXPERIENCE: ExperienceItem[] = [
     company: "Nihong Jastip",
     period: "Feb 2024 - Present",
     type: "Freelance",
-    techStack: ["React", "JavaScript", "TypeScript", "Vite", "TailwindCSS", "Firebase", "Framer Motion", "Recharts", "jsPDF", "PWA", "Vercel"],
+    techStack: ["React.js", "Next.js", "TypeScript", "Groq AI", "TailwindCSS", "Firebase", "Framer Motion", "Recharts", "jsPDF", "PWA", "Vercel"],
     description: "experience.items.jastip_web",
   },
   {
