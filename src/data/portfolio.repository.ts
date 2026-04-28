@@ -23,6 +23,8 @@ const HERO_DATA: HeroData = {
   description: "about.description",
   birthDate: "1997-11-07",
   location: "Depok, Indonesia",
+  email: "candrasdk@gmail.com",
+  phone: "085156775933",
   socials: {
     github: 'https://github.com/candrasdkd',
     linkedin: 'https://www.linkedin.com/in/candrasdk/',
@@ -94,6 +96,11 @@ const EXPERIENCE: ExperienceItem[] = [
     description: "experience.items.maps",
     certificate: "",
   },
+];
+
+const LANGUAGES = [
+  { name: 'Indonesian', level: 'Native' },
+  { name: 'English', level: 'Professional Working Proficiency' },
 ];
 
 const EDUCATION: EducationItem[] = [
@@ -219,6 +226,10 @@ class PortfolioRepository implements IPortfolioRepository {
 
   getSkills(): Skill[] {
     return SKILLS;
+  }
+
+  getLanguages() {
+    return LANGUAGES;
   }
 }
 

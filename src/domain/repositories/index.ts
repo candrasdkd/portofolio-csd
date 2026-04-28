@@ -10,4 +10,5 @@ export interface IPortfolioRepository {
   getExperience(): ExperienceItem[];
   getEducation(): EducationItem[];
   getSkills(): Skill[];
+  getLanguages(): { name: string; level: string }[];
 }

@@ -61,6 +61,8 @@ export interface HeroData {
   description: string;
   birthDate: string;
   location: string;
+  email: string;
+  phone: string;
   socials: {
     github: string;
     linkedin: string;

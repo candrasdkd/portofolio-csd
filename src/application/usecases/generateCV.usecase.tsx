@@ -55,50 +55,36 @@ export const generateCVUseCase = async (heroData: HeroData): Promise<void> => {
     setTimeout(resolve, 1500);
   });
 
-  // 4. Ambil element template dan capture sebagai JPEG.
+  // 4. Ambil element template.
   const element = tempContainer.querySelector('#cv-template') as HTMLElement;
   if (!element) throw new Error('Template not found');
 
-  // Pastikan src img sudah ter-set di DOM level (workaround html-to-image).
-  if (photoSrc) {
-    const imgEl = element.querySelector('img') as HTMLImageElement | null;
-    if (imgEl) {
-      imgEl.src = photoSrc;
-      await new Promise<void>((resolve) => {
-        if (imgEl.complete && imgEl.naturalWidth > 0) {
-          resolve();
-        } else {
-          imgEl.onload = () => resolve();
-          imgEl.onerror = () => resolve();
-        }
-      });
-    }
-  }
-
   await document.fonts.ready;
 
-  const pixelRatio = 1.35;
-
-  // Workaround Safari: render pertama sering kosong, render dua kali untuk fix.
-  await toJpeg(element, { quality: 0.1, pixelRatio: 1 });
-  const imgData = await toJpeg(element, {
-    quality: 0.92,
-    pixelRatio,
-    fetchRequestInit: { cache: 'force-cache' },
+  // 5. Buat PDF menggunakan pdf.html agar text-selectable dan auto-paging rapi.
+  const pdf = new jsPDF({
+    orientation: 'p',
+    unit: 'mm',
+    format: 'a4',
+    compress: true
   });
 
-  const elemWidth = element.offsetWidth;
-  const elemHeight = element.offsetHeight;
+  // Gunakan callback pdf.html untuk handling multi-page yang lebih smart.
+  await pdf.html(element, {
+    callback: (doc) => {
+      doc.save(`CV_${heroData.name.replace(/\s+/g, '_')}.pdf`);
+    },
+    x: 0,
+    y: 0,
+    width: 210, // A4 width dalam mm
+    windowWidth: 850, // Sesuaikan dengan lebar element di DOM (210mm ~ 800-900px)
+    autoPaging: 'text', // Menghindari potong teks di tengah baris
+    margin: [5, 0, 10, 0], // Margin [top, left, bottom, right] dalam mm
+  });
 
-  // 5. Buat PDF dan simpan.
-  const pdf = new jsPDF('p', 'mm', 'a4');
-  const pdfWidth = pdf.internal.pageSize.getWidth();
-  const pdfHeight = (elemHeight * pdfWidth) / elemWidth;
-
-  pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
-  pdf.save(`CV_${heroData.name.replace(/\s+/g, '_')}.pdf`);
-
-  // 6. Cleanup DOM.
-  root.unmount();
-  document.body.removeChild(tempContainer);
+  // 6. Cleanup DOM (tunggu proses render selesai).
+  setTimeout(() => {
+    root.unmount();
+    document.body.removeChild(tempContainer);
+  }, 3000);
 };
