@@ -43,6 +43,7 @@ export interface Skill {
   name: string;
   icon: string;
   level: number; // 0-100
+  logoUrl?: string; // Optional custom logo image URL
 }
 
 export interface EducationItem {

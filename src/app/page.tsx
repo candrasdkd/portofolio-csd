@@ -11,6 +11,7 @@ import Experience from '@/presentation/sections/Experience';
 import Projects from '@/presentation/sections/Projects';
 import Contact from '@/presentation/sections/Contact';
 import Loader from '@/presentation/components/Loader';
+import CustomCursor from '@/presentation/components/CustomCursor';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -24,6 +25,7 @@ export default function Home() {
 
   return (
     <>
+      <CustomCursor />
       <AnimatePresence mode="wait">
         {loading && <Loader key="loader" />}
       </AnimatePresence>
